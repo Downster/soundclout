@@ -42,6 +42,24 @@ const uploadImage = (fileName, fileType, file) => {
     })
 }
 
+const deleteAudio = async (fileName) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            Bucket: 'soundclout',
+            Key: fileName
+        }
+
+        s3.deleteObject(params, (err, data) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve('Deleted successfully')
+            }
+        });
+    })
+
+}
+
 module.exports = {
-    uploadImage, uploadAudio
+    uploadImage, uploadAudio, deleteAudio
 }

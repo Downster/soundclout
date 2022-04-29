@@ -33,7 +33,6 @@ export const getSongs = () => async (dispatch) => {
 
     if (res.ok) {
         const songs = await res.json()
-        console.log(songs)
         dispatch(loadSongs(songs))
     } else {
         //error handling here
@@ -56,8 +55,6 @@ export const deleteSong = (songId) => async (dispatch) => {
 
 
 export const edit = (id, song) => async (dispatch) => {
-    console.log('edit')
-    console.log(song)
     const res = await csrfFetch(`/api/songs/${id}`, {
         method: 'PATCH',
         body: song
@@ -72,8 +69,6 @@ export const edit = (id, song) => async (dispatch) => {
 }
 
 export const createSong = (song) => async (dispatch) => {
-    console.log(song)
-    console.log('here')
     const res = await csrfFetch('/api/songs', {
         method: 'POST',
         body: song

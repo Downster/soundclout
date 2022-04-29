@@ -1,4 +1,4 @@
-const { uploadAudio, uploadImage } = require('../../utils/awsUpload')
+const { uploadAudio, uploadImage, deleteAudio } = require('../../utils/awsUpload')
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const db = require("../../db/models");
@@ -26,9 +26,11 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 router.delete('/:songId', asyncHandler(async (req, res) => {
-    const { songId } = req.params
+    const { songId, } = req.params
     const song = await db.Song.findByPk(songId);
-    song.destroy()
+    console.log(song.title)
+    await deleteAudio(song.title)
+    song.destroy();
     res.json({
         'Message': 'Deleted Successfully'
     })
