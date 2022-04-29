@@ -65,12 +65,15 @@
     line-height: 1.5;
     font-weight: 100;
 }
+.nav-bar-stuff{ width: 100%;}
 
 .user-profile{
     display: flex;
     width: 185px;
     height: 48px;
     box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
     float: left;
     padding: 12px 28px 12px 10px;
 }
