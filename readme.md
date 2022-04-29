@@ -48,34 +48,23 @@ View and test out SoundClout on [Heroku](https://soundclout-app.herokuapp.com/)
 
 ### Features
 
-Doggy Done allows logged-in users to add/edit/delete/get features from the home page without ever redirecting from the base page.
-
-Logged in users can:
-
-- Add/Edit/Delete Lists
-- Add/Edit/Delete Tasks
-- Add/Edit/Delete Dogs
-- View Tasks by Category: All, Due Today, Due Tomorrow, Completed, Overdue and User-Created List Categories
-- View Tasks assigned to a certain dog
-- Search for Tasks
-- View Task details
 
 # Page Views
 
 ### Splash page
-<img src='https://i.imgur.com/j9XZqVy.png'/>
+
 
 ### Login 
-<img src='https://imgur.com/nUFcF4R.png'/>
+
 
 ### Sign-up
-<img src='https://imgur.com/nUFcF4R.png' />
+
 
 ### Main page view
-<img src='https://imgur.com/paEhovp.png' />
+
 
 ### Main page detail view
-<img src='https://imgur.com/inFqfV1.png' />
+
 
 
 
