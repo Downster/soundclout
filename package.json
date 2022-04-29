@@ -1,0 +1,25 @@
+{
+  "name": "SoundClout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "heroku-postbuild": "npm run build --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Downster/soundclout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Downster/soundclout/issues"
+  },
+  "homepage": "https://github.com/Downster/soundclout#readme"
+}
