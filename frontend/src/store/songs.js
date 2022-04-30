@@ -3,11 +3,13 @@ import { csrfFetch } from "./csrf";
 const LOAD_SONGS = 'songs/LOAD_SONGS'
 const RECEIVE_SONG = 'songs/RECEIVE_SONG';
 const EDIT_SONG = 'songs/EDIT_SONG';
+const DELETE_SONG = 'songs/DELETE_SONG';
 
 const loadSongs = (songs) => ({
     type: LOAD_SONGS,
     songs
 })
+
 
 const receiveSong = (song) => ({
     type: RECEIVE_SONG,
@@ -19,6 +21,11 @@ const editSong = (song) => ({
     song
 })
 
+const remove = (songId) => ({
+    type: DELETE_SONG,
+    songId
+})
+
 export const getSongs = () => async (dispatch) => {
     const res = await csrfFetch('/api/songs', {
         method: 'GET',
@@ -26,26 +33,42 @@ export const getSongs = () => async (dispatch) => {
 
     if (res.ok) {
         const songs = await res.json()
-        console.log(songs)
         dispatch(loadSongs(songs))
     } else {
         //error handling here
     }
+}
 
+export const deleteSong = (songId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/songs/${songId}`, {
+        method: 'DELETE'
+    })
 
+    if (res.ok) {
+        dispatch(remove(songId))
+    }
 
 }
 
-export const edit = (id) => async (dispatch) => {
+
+
+
+
+export const edit = (id, song) => async (dispatch) => {
     const res = await csrfFetch(`/api/songs/${id}`, {
         method: 'PATCH',
-        body: ''
+        body: song
     })
+
+    if (res.ok) {
+        const song = await res.json()
+        console.log(song)
+        dispatch(editSong(song))
+    }
 
 }
 
 export const createSong = (song) => async (dispatch) => {
-    console.log('here')
     const res = await csrfFetch('/api/songs', {
         method: 'POST',
         body: song
@@ -60,7 +83,10 @@ export const createSong = (song) => async (dispatch) => {
 
 }
 
-const songsReducer = (state = {}, action) => {
+const initialState = {
+};
+
+const songsReducer = (state = initialState, action) => {
     const nextState = { ...state };
     switch (action.type) {
         case LOAD_SONGS:
@@ -68,12 +94,15 @@ const songsReducer = (state = {}, action) => {
                 nextState[song.id] = song
             })
             return nextState
+        case EDIT_SONG:
+            nextState[action.song.id] = action.song
+            return nextState
         case RECEIVE_SONG:
             nextState[action.song.id] = action.song
             return nextState;
-        // case REMOVE_TRACK:
-        //     delete nextState[action.trackId]
-        //     return nextState;
+        case DELETE_SONG:
+            delete nextState[action.trackId]
+            return nextState;
         default:
             return state;
     }

@@ -3,3 +3,55 @@
 *{
     font: 12px/1.4 Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
 }
+
+#root{
+    height: min(100vh);
+}
+.modal-blur{
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0,0%,94.9%,.9);
+    backdrop-filter: grayscale(1);
+}
+.image-form-container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.upload-image{
+    position: absolute;
+}
+
+.song-image-edit{
+    width: 260px;
+    height: 260px;
+}
+
+.image-edit{
+    width: 290px;
+}
+
+
+.edit-song-container{
+    position: absolute;
+    width: 815px;
+    height: 923.359px;
+    left: 25%;
+    top: 10%;
+    z-index: 2;
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 14px 25px 0;
+}
+
+.main-page-blur{
+    background-color: hsla(0,0%,94.9%,.9);
+}
+
+.edit-song-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}

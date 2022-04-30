@@ -14,6 +14,7 @@ function Navigation({ isLoaded }) {
                 <NavLink className='navbar-link' to='/try-pro'>Try Pro</NavLink>
                 <NavLink className='navbar-link' to='/upload'>Upload</NavLink>
                 <ProfileButton user={sessionUser} />
+                <i className="fa-solid fa-ellipsis"></i>
             </>
         );
     } else {

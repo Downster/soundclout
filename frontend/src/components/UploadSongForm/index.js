@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSong } from '../../store/songs';
 
-const UploadSong = ({ sessionUser, options }) => {
+const UploadSongForm = ({ sessionUser }) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState('')
     const [image, setImage] = useState(null)
@@ -10,7 +10,7 @@ const UploadSong = ({ sessionUser, options }) => {
     const [description, setDescription] = useState('')
     const [caption, setCaption] = useState('')
     const [privacy, setPrivacy] = useState('public')
-    const handleSubmit = (e, type) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData()
         formData.append('audiofile', song)
@@ -20,11 +20,8 @@ const UploadSong = ({ sessionUser, options }) => {
         formData.append('description', description)
         formData.append('caption', caption)
         formData.append('private', privacy)
-        if (type === 'upload') {
-            dispatch(createSong(formData))
-        } else if (options === 'edit') {
+        dispatch(createSong(formData))
 
-        }
     };
 
     const updateFile = (e, type) => {
@@ -38,9 +35,8 @@ const UploadSong = ({ sessionUser, options }) => {
     };
 
     return (
-        <div>
-            <h1>Authenticated</h1>
-            <form onSubmit={(e, type) => handleSubmit(e, (options === 'edit') ? 'edit' : 'upload')}>
+        <div className={'upload-song-container'}>
+            <form onSubmit={(e, type) => handleSubmit(e)}>
                 <input
                     type='text'
                     value={title}
@@ -91,4 +87,4 @@ const UploadSong = ({ sessionUser, options }) => {
     )
 }
 
-export default UploadSong
+export default UploadSongForm
