@@ -2,16 +2,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSong } from '../../store/songs';
 import { v4 as uuidv4 } from 'uuid';
-import env from "react-dotenv";
 import AWS from 'aws-sdk'
 import './uploadSong.css'
 
 const UploadSongForm = ({ sessionUser }) => {
     const s3 = new AWS.S3()
     s3.config.update({
-        accessKeyId: env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: env.AWS_SECRET_ACCESS_KEY
+        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
     })
+
 
     const dispatch = useDispatch();
     const [title, setTitle] = useState('')
@@ -43,7 +43,7 @@ const UploadSongForm = ({ sessionUser }) => {
         if (type === 'song') {
             setSong(file);
             uploadAudio(fileName, file)
-            setSongUrl(`https://${env.S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+            setSongUrl(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
             setAwsTitle(fileName)
         }
         if (type === 'image') {
