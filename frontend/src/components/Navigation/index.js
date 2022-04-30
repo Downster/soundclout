@@ -31,6 +31,7 @@ function Navigation({ isLoaded }) {
         <div className='nav-bar'>
             <img src={require('./images/soundcloud.png')} />
             <NavLink className='navbar-link-home' exact to="/">Home</NavLink>
+            <NavLink className='navbar-link-about' to='/about'>About</NavLink>
             <div className='header-search'>
                 <form className='header-search-form'>
                     <input className='search-bar' placeholder='Search'></input>

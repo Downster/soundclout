@@ -13,7 +13,7 @@ const loadSongs = (songs) => ({
 
 const receiveSong = (song) => ({
     type: RECEIVE_SONG,
-    song
+    song,
 });
 
 const editSong = (song) => ({

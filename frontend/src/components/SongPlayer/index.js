@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState, useRef } from "react";
 import { setSeek } from "../../store/songPlay";
 import './SongPlayer.css'
+import MiniSongCard from "./MiniSongCard";
 
-const SongPlayer = ({ hasSong }) => {
+const SongPlayer = () => {
     const currentSong = useSelector(state => state.currentSong);
     const [position, setPosition] = useState(0)
     const intervalRef = useRef(null)
@@ -17,7 +18,7 @@ const SongPlayer = ({ hasSong }) => {
             sec = `0` + sec;
         }
 
-        return `${min} : ${sec}`;
+        return `${min}:${sec}`;
     }
 
     const updateWidth = () => {
@@ -48,12 +49,14 @@ const SongPlayer = ({ hasSong }) => {
     }
     return (
         <div className="sound-bar">
-            <img src={require('./images/svgexport-5.png')} />
-            <img src={require('./images/Playcurrent.png')} />
-            <img src={require('./images/svgexport-6.png')} />
-            <img src={require('./images/Shuffle.png')} />
-            <img src={require('./images/Repeat.png')} />
-            <p className="current-time hide">{(currentSong.song?.seek()) ? formatTime(currentSong.song.seek()) : '0 : 00'}</p>
+            <img className='soundbar-button' src={require('./images/svgexport-5.png')} />
+            <img className='soundbar-button' src={require('./images/Playcurrent.png')} />
+            <img className='soundbar-button' src={require('./images/svgexport-6.png')} />
+            <img className='soundbar-button' src={require('./images/Shuffle.png')} />
+            <img className='soundbar-button' src={require('./images/Repeat.png')} />
+            <div className="time-passed">
+                <p className="current-time">{(currentSong.song?.seek()) ? formatTime(currentSong.song.seek()) : '0:00'}</p>
+            </div>
             <input className='track-bar'
                 type='range'
                 min='0'
@@ -62,9 +65,11 @@ const SongPlayer = ({ hasSong }) => {
                 max={currentSong.duration}
                 onChange={(e) => onScrub(e.target.value)}
             />
-            <p className="duration hide">{formatTime(currentSong.duration)}</p>
+            <div className="duration-text">
+                <p className="duration">{formatTime(currentSong.duration)}</p>
+            </div>
             <img src={require('./images/svgexport-7.png')} />
-            <p>Mini song card here</p>
+            <MiniSongCard currentSongId={currentSong.songId} />
             <img src={require('./images/svgexport-9.png')} />
 
         </div>

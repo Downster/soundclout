@@ -15,9 +15,10 @@ export const pauseSong = () => ({
     type: PAUSE_SONG
 });
 
-export const receivePlaySong = (song) => ({
+export const receivePlaySong = (song, songId) => ({
     type: RECEIVE_PLAY_SONG,
-    song
+    song,
+    songId
 });
 
 export const clearSong = () => ({
@@ -41,7 +42,8 @@ const initialState = {
     isPlaying: false,
     seek: null,
     isPaused: false,
-    duration: null
+    duration: null,
+    songId: null,
 };
 
 const songPlayReducer = (state = initialState, action) => {
@@ -50,6 +52,7 @@ const songPlayReducer = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_PLAY_SONG:
             nextState.song = action.song
+            nextState.songId = action.songId
             if (nextState.isPaused) {
                 nextState.song.play()
                 nextState.song.seek(nextState.seek)

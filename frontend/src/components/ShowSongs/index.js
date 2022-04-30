@@ -27,7 +27,7 @@ const ShowSongs = () => {
             }
 
         });
-        dispatch(receivePlaySong(sound))
+        dispatch(receivePlaySong(sound, song.id))
     }
 
     const pause = () => {

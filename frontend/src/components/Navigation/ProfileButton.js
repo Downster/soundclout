@@ -5,7 +5,6 @@ import * as sessionActions from '../../store/session';
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
-    console.log(user.imageUrl)
 
     const openMenu = () => {
         if (showMenu) return;
@@ -33,7 +32,7 @@ function ProfileButton({ user }) {
         <>
             <div className="nav-stuff">
                 <div className="user-profile" onClick={openMenu}>
-                    <img className='user-image' src={user.imageUrl} alt='user image' />
+                    <img className='user-image' src={user.imageUrl} alt='user' />
                     <p className="profile-name">{user.username}</p>
                     <i className="fa-solid fa-angle-down"></i>
                 </div>
