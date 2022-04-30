@@ -30,6 +30,19 @@
     font-weight: 100;
     border-right:  1px solid #111
 }
+.navbar-link-about{
+    width: 104px;
+    font-family: Interstate,Lucida Grande,Arial,sans-serif;
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+    padding: 12px;
+    font-weight: 100;
+    border-right:  1px solid #111
+}
 
 .header-search{
     width: 406.17px;

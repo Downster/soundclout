@@ -16,11 +16,6 @@ module.exports = {
         references: { model: 'Users' },
         type: Sequelize.INTEGER
       },
-      albumId: {
-        allowNull: true,
-        references: { model: 'Albums' },
-        type: Sequelize.INTEGER
-      },
       url: {
         allowNull: false,
         type: Sequelize.STRING
@@ -34,6 +29,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(40)
       },
+      awsTitle: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       description: {
         allowNull: true,
         type: Sequelize.TEXT,
@@ -43,9 +42,10 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       genreId: {
-        allowNull: true,
+        allowNull: false,
         references: { model: 'Genres' },
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 1
       },
       private: {
         allowNull: false,

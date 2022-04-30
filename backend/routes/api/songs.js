@@ -16,7 +16,6 @@ router.get('/', asyncHandler(async (req, res) => {
     const songs = await db.Song.findAll({
         include: [
             { model: db.User },
-            { model: db.Album },
             { model: db.Genre }
         ]
 
@@ -26,10 +25,9 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 router.delete('/:songId', asyncHandler(async (req, res) => {
-    const { songId, } = req.params
+    const { songId } = req.params
     const song = await db.Song.findByPk(songId);
-    console.log(song.title)
-    await deleteAudio(song.title)
+    await deleteAudio(song.awsTitle)
     song.destroy();
     res.json({
         'Message': 'Deleted Successfully'
@@ -71,13 +69,11 @@ router.patch('/:songId', upload.fields([
 
 router.post('/',
     upload.fields([
-        {
-            name: 'audiofile', maxCount: 1
-        }, { name: 'image', maxCount: 1 }
+        { name: 'image', maxCount: 1 }
     ]),
     asyncHandler(
         async (req, res) => {
-            const { title, userId, description, caption, private } = req.body
+            const { url, title, userId, description, caption, private, awsTitle } = req.body
             if (!title) {
                 res.status = 400;
                 res.json({
@@ -97,17 +93,17 @@ router.post('/',
                 imageLink = await uploadImage(imageName, imageType, imageFile)
             }
 
-            const audioFile = req.files.audiofile[0].buffer
-            const audioLink = await uploadAudio(title, audioFile)
             const song = await db.Song.create({
                 userId,
-                url: audioLink,
+                url,
+                awsTitle,
                 imageUrl: (imageLink) ? imageLink : 'https://imgur.com/hdrdJxY.jpg',
                 title,
                 description,
                 caption,
                 private: (private === 'public') ? false : true
             })
+            console.log(song)
             res.json(song)
         }))
 

@@ -5,4 +5,84 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: #f2f2f2;
+    border-top: 1px solid #cecece;
+    height: 48px;
 }
+.current-time{
+    color: #f50;
+    line-height: 46px;
+    text-align: right;
+}
+
+.mini-song-image{
+    width: 30px;
+    height: 30px;
+}
+.soundbar-button{
+    margin-right: 14px;
+}
+
+.duration-text{
+    width: 50px;
+    height: 46px;
+}
+
+.duration{
+    line-height: 46px;
+    text-align: left;
+
+}
+
+.time-passed{
+        width: 50px;
+        height: 46px;
+}
+.track-bar{
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 516px;
+      height: 2px;
+      -webkit-appearance: none;
+      background-color: #ccc;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color:  #f50;
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor:grab;
+      background: #f50;
+      box-shadow: -80px 0 0 80px  #f50;
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color:  #f50;
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color:  #f50;
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}
+
+
+

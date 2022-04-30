@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignUpFormPage from "./components/SignUpFormPage";
 import * as sessionActions from "./store/session";
@@ -34,6 +34,11 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/upload'>
+            {(sessionUser) ?
+              <EditOrUploadSong sessionUser={sessionUser} options={'upload'} /> : <h1>Please login</h1>
+            }
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>
@@ -44,9 +49,6 @@ function App() {
             <IndividualSong sessionUser={sessionUser} setShowEdit={setShowEdit} showEdit={showEdit} />
           </Route>
           <Route path='/'>
-            {sessionUser && (
-              <EditOrUploadSong sessionUser={sessionUser} options={'upload'} />
-            )}
             <ShowSongs />
             <SongPlayer hasSong={hasSong} />
           </Route>
