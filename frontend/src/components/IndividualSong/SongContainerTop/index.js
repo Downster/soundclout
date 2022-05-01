@@ -13,10 +13,20 @@ const SongContainerTop = ({ song }) => {
             progressColor: '#f50',
             cursorColor: '#f50',
             // This parameter makes the waveform look like SoundCloud's player
-            barWidth: 3
+            barWidth: 3,
         })
         waveSurfer.load(song.url)
+        waveSurfer.on('ready', function () {
+            const timeline = Object.create(WaveSurfer.Timeline);
+
+            timeline.init({
+                wavesurfer: waveSurfer,
+                container: '#waveform-timeline'
+            });
+        });
     }, [])
+
+
 
     const playSong = () => {
         waveSurfer.playPause()
@@ -39,8 +49,12 @@ const SongContainerTop = ({ song }) => {
                 <img className='song-image' src={(song.Album?.imageUrl) ? song.Album.imageUrl : song.imageUrl}></img>
             </div>
             <div id='waveform'>
+                <div id='wave-timeline'>
 
+                </div>
             </div>
+            <div>Total time: <span id="time-total">0</span> milliseconds</div>
+            <div>Current time: <span id="time-current">0</span> milliseconds</div>
         </div>
     )
 }

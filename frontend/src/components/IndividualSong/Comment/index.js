@@ -3,12 +3,19 @@ import { useDispatch } from "react-redux"
 import { deleteSong } from "../../../store/songs"
 import { removeSong } from "../../../store/selectedSong"
 import { useHistory } from "react-router-dom"
+import { createComment } from "../../../store/comments"
 const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const history = useHistory()
     const [comment, setComment] = useState('')
     const dispatch = useDispatch()
-    const onSubmit = (e) => {
-        //comment submit goes here
+    const submitComment = (e) => {
+        e.preventDefault()
+        const newComment = {
+            userId: sessionUser.id,
+            songId: song.id,
+            body: comment
+        }
+        dispatch(createComment(newComment))
     }
 
     const remove = () => {
@@ -20,7 +27,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     return (
         <div className="comment-form">
             <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
-            <form>
+            <form onSubmit={(e) => submitComment(e)}>
                 <input
                     type='text'
                     value={comment}
@@ -30,7 +37,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                 </input>
             </form>
             <button>
-                <i class="fa-solid fa-heart"></i>
+                <i className="fa-solid fa-heart"></i>
                 Like
             </button>
             <button onClick={() => setShowEdit(!showEdit)}>

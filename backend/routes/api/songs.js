@@ -5,8 +5,7 @@ const db = require("../../db/models");
 const crypto = require('crypto');
 const multer = require('multer')
 const { memoryStorage } = require('multer')
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth } = require('../../utils/auth')
 const storage = memoryStorage()
 const upload = multer({ storage })
 const router = express.Router();
@@ -24,7 +23,7 @@ router.get('/', asyncHandler(async (req, res) => {
 
 }))
 
-router.delete('/:songId', asyncHandler(async (req, res) => {
+router.delete('/:songId', requireAuth, asyncHandler(async (req, res) => {
     const { songId } = req.params
     const song = await db.Song.findByPk(songId);
     await deleteAudio(song.awsTitle)
@@ -35,7 +34,7 @@ router.delete('/:songId', asyncHandler(async (req, res) => {
 
 }))
 
-router.patch('/:songId', upload.fields([
+router.patch('/:songId', requireAuth, upload.fields([
     { name: 'image', maxCount: 1 },
 ]), asyncHandler(async (req, res) => {
     const { title, description, caption, private } = req.body
@@ -71,6 +70,7 @@ router.post('/',
     upload.fields([
         { name: 'image', maxCount: 1 }
     ]),
+    requireAuth,
     asyncHandler(
         async (req, res) => {
             const { url, title, userId, description, caption, private, awsTitle } = req.body
