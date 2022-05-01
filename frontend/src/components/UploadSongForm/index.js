@@ -71,6 +71,7 @@ const UploadSongForm = ({ sessionUser }) => {
 
 
     return (
+
         <div className='upload-song-container'>
             <div>Native SDK File Upload Progress is {progress}%</div>
             <div className="upload-song-header">
@@ -136,6 +137,7 @@ const UploadSongForm = ({ sessionUser }) => {
                 </div>
             </div>
         </div>
+
     )
 }
 

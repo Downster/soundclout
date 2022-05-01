@@ -91,6 +91,7 @@ router.post('/',
                 imageFile = req.files.image[0].buffer
                 imageType = req.files.image[0].mimetype
                 imageLink = await uploadImage(imageName, imageType, imageFile)
+                console.log(imageLink)
             }
 
             const song = await db.Song.create({

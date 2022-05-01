@@ -3,12 +3,21 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-
-function Navigation({ isLoaded }) {
+function Navigation({ isLoaded, setSignIn, setSignUp }) {
     const sessionUser = useSelector(state => state.session.user);
-
+    let search;
+    let sessionLogo;
     let sessionLinks;
     if (sessionUser) {
+        search = (
+            <input className='search-bar' placeholder='Search'></input>
+        )
+
+        sessionLogo = (
+            <>
+                <img src={require('./images/soundcloud.png')} />
+            </>
+        )
         sessionLinks = (
             <>
                 <NavLink className='navbar-link' to='/try-pro'>Try Pro</NavLink>
@@ -18,23 +27,32 @@ function Navigation({ isLoaded }) {
             </>
         );
     } else {
+        search = (
+            <input className='search-bar unauth' placeholder='Search for artists, bands, tracks, and podcasts'></input>
+        )
+        sessionLogo = (
+            <>
+                <img src={require('./images/soundcloud1.png')} />
+            </>
+        )
         sessionLinks = (
             <>
-                <NavLink className='navbar-link' to="/login">Sign In</NavLink>
-                <NavLink className='navbar-link' to="/signup">Create Account</NavLink>
-                <NavLink className='navbar-link' to='/upload'>Upload</NavLink>
+                <button className='navbar-signin-button' to="/login" onClick={setSignIn}>Sign In</button>
+                <button className='navbar-create-button' to="/signup" onClick={setSignUp}>Create Account</button>
+                <button className='navbar-upload-button' to='/upload'>Upload</button>
             </>
         );
     }
 
     return (
         <div className='nav-bar'>
-            <img src={require('./images/soundcloud.png')} />
+            {sessionLogo}
             <NavLink className='navbar-link-home' exact to="/">Home</NavLink>
             <NavLink className='navbar-link-about' to='/about'>About</NavLink>
+            <NavLink className='navbar-link-discover' to='/library'>Library</NavLink>
             <div className='header-search'>
                 <form className='header-search-form'>
-                    <input className='search-bar' placeholder='Search'></input>
+                    {search}
                 </form>
             </div>
             {isLoaded && sessionLinks}

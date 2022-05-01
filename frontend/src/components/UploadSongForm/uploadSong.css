@@ -4,3 +4,14 @@
     justify-content: center;
 
 }
+
+.upload-song-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 869px;
+    box-shadow: 0 2px 12px -5px rgb(0 0 0 / 10%);
+    border: 1px solid #f2f2f2;
+}
