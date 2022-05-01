@@ -18,6 +18,10 @@ module.exports = {
         references: { model: 'Songs' },
         type: Sequelize.INTEGER
       },
+      time: {
+        allowNull: false,
+        type: Sequelize.FLOAT,
+      },
       body: {
         type: Sequelize.TEXT
       },

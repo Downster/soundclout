@@ -18,7 +18,6 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
     useEffect(() => {
         dispatch(addSelectedSong(song))
         dispatch(getComments(songId))
-
     }, [dispatch])
 
 

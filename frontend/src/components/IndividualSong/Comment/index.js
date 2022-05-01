@@ -4,16 +4,20 @@ import { deleteSong } from "../../../store/songs"
 import { removeSong } from "../../../store/selectedSong"
 import { useHistory } from "react-router-dom"
 import { createComment } from "../../../store/comments"
+import { useSelector } from "react-redux"
 const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const history = useHistory()
     const [comment, setComment] = useState('')
     const dispatch = useDispatch()
+    const time = useSelector(state => state.selectedSong.time)
     const submitComment = (e) => {
+        console.log(time)
         e.preventDefault()
         const newComment = {
             userId: sessionUser.id,
             songId: song.id,
-            body: comment
+            body: comment,
+            time
         }
         dispatch(createComment(newComment))
     }
@@ -41,7 +45,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                 Like
             </button>
             <button onClick={() => setShowEdit(!showEdit)}>
-                <i class="fa-solid fa-pencil"></i>
+                <i className="fa-solid fa-pencil"></i>
                 Edit
             </button>
             <button onClick={remove}>

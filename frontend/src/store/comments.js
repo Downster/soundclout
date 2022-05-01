@@ -31,7 +31,7 @@ export const getComments = (songId) => async (dispatch) => {
 
     if (res.ok) {
         const comments = await res.json()
-        console.log(comments)
+        dispatch(loadComment(comments))
     }
 }
 

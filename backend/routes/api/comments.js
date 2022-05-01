@@ -31,14 +31,12 @@ router.get('/:songId', asyncHandler(async (req, res) => {
 }))
 
 router.post('/', requireAuth, validateComment, asyncHandler(async (req, res) => {
-    const { userId, songId, body } = req.body
-    console.log(userId)
-    console.log(songId)
-    console.log(body)
+    const { userId, songId, body, time } = req.body
     const comment = await db.Comment.create({
         userId,
         songId,
-        body
+        body,
+        time
     })
     res.json(comment);
 }))

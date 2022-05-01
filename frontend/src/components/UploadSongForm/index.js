@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { createSong } from '../../store/songs';
 import { v4 as uuidv4 } from 'uuid';
 import AWS from 'aws-sdk'
@@ -12,7 +13,7 @@ const UploadSongForm = ({ sessionUser }) => {
         secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
     })
 
-
+    const history = useHistory()
     const dispatch = useDispatch();
     const [title, setTitle] = useState('')
     const [songUrl, setSongUrl] = useState('')
@@ -34,7 +35,10 @@ const UploadSongForm = ({ sessionUser }) => {
         formData.append('description', description)
         formData.append('caption', caption)
         formData.append('private', privacy)
-        dispatch(createSong(formData))
+        const result = dispatch(createSong(formData))
+        if (result) {
+            history.push('/discover')
+        }
     };
 
     const updateFile = async (e, type) => {
