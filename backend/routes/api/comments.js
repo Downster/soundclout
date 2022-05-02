@@ -34,11 +34,16 @@ router.get('/:songId', asyncHandler(async (req, res) => {
 
 router.post('/', requireAuth, validateComment, asyncHandler(async (req, res) => {
     const { userId, songId, body, time } = req.body
-    const comment = await db.Comment.create({
+    const newComment = await db.Comment.create({
         userId,
         songId,
         body,
         time
+    })
+    const comment = await db.Comment.findByPk(newComment.id, {
+        include: [
+            { model: db.User },
+        ]
     })
     res.json(comment);
 }))

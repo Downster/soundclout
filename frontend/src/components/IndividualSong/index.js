@@ -37,20 +37,23 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
                     {commentsLoaded &&
                         <SongContainerTop sessionUser={sessionUser} song={song} comments={comments} />
                     }
-                    <div className="comment-about">
-                        <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
-                        <div className="artist-left">
-                            <ArtistCard />
-                        </div>
-                        <div className="comment-right">
-                            <p>{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
-                        </div>
-                        <div className="comments">
-                            {comments && Object.values(comments).map((comment) => {
-                                return < CommentCard sessionUser={sessionUser} comment={comment} />
-                            })}
-                        </div>
+                    <div className="song-bottom">
 
+                        <div className="comment-about">
+                            <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
+                            <div className="artist-left">
+                                <ArtistCard />
+                            </div>
+                            <div className="comment-right">
+                                <p>{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
+                            </div>
+                            <div className="comments">
+                                {comments && Object.values(comments).map((comment) => {
+                                    return < CommentCard sessionUser={sessionUser} comment={comment} />
+                                })}
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             }
