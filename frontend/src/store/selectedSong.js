@@ -1,9 +1,15 @@
 const SELECT_SONG = 'selectedSong/SELECT_SONG'
 const DESELECT_SONG = 'selectedSong/DESELECT_SONG'
+const TRACK_TIME = 'selectedSong/TRACK_TIME'
 
 const selectSong = (song) => ({
     type: SELECT_SONG,
     song
+})
+
+const trackTime = (time) => ({
+    type: TRACK_TIME,
+    time
 })
 
 const deselectSong = () => ({
@@ -18,6 +24,10 @@ export const removeSong = () => async (dispatch) => {
     dispatch(deselectSong())
 }
 
+export const updateSongTime = (time) => async (dispatch) => {
+    dispatch(trackTime(time))
+}
+
 const initialState = {
 };
 
@@ -30,6 +40,9 @@ const selectedSongReducer = (state = initialState, action) => {
         case DESELECT_SONG:
             const emptyState = {}
             return emptyState
+        case TRACK_TIME:
+            nextState['time'] = action.time
+            return nextState
         default:
             return state;
     }

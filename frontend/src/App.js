@@ -14,6 +14,8 @@ import './index.css'
 import EditOrUploadSong from "./components/UploadSongForm";
 import SplashPage from "./components/SplashPage";
 import SignupFormModal from "./components/SignUpFormModal";
+import { getAllLikes } from './store/likes'
+import { getAllGenres } from "./store/genres";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getAllLikes())
+    dispatch(getAllGenres())
   }, [dispatch]);
 
 

@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { setSeek } from "../../store/songPlay";
 import './SongPlayer.css'
 import MiniSongCard from "./MiniSongCard";
+import { formatTime } from "../../utils/formatTime";
 
 const SongPlayer = () => {
     const currentSong = useSelector(state => state.currentSong);
@@ -10,16 +11,6 @@ const SongPlayer = () => {
     const intervalRef = useRef(null)
     const dispatch = useDispatch()
 
-    const formatTime = (time) => {
-        let min = Math.floor(time / 60);
-
-        let sec = Math.floor(time % 60);
-        if (sec < 10) {
-            sec = `0` + sec;
-        }
-
-        return `${min}:${sec}`;
-    }
 
     const updateWidth = () => {
         setPosition((currentSong.song.seek() / currentSong.song.duration()) * 100);

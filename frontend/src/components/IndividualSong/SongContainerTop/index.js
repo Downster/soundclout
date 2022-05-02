@@ -1,25 +1,59 @@
 import { useParams, Link } from "react-router-dom"
-import { useEffect } from "react"
-import { useSelector } from "react-redux";
+import { useEffect, useState, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import WaveSurfer from 'wavesurfer.js';
+import { formatTime } from "../../../utils/formatTime";
+import { updateSongTime } from "../../../store/selectedSong";
 
 const SongContainerTop = ({ song }) => {
+    const dispatch = useDispatch()
+    const [songDuration, setSongDuration] = useState();
+    const [currentTime, setCurrentTime] = useState();
     const { songId } = useParams()
-    let waveSurfer;
+    const waveformRef = useRef();
+    const timeInterval = useRef()
+    const waveSurfer = useRef();
     useEffect(() => {
-        waveSurfer = WaveSurfer.create({
-            container: '#waveform',
+        waveSurfer.current = WaveSurfer.create({
+            container: waveformRef.current,
             waveColor: 'grey',
             progressColor: '#f50',
             cursorColor: '#f50',
             // This parameter makes the waveform look like SoundCloud's player
-            barWidth: 3
+            barWidth: 3,
         })
-        waveSurfer.load(song.url)
+        waveSurfer.current.load(song.url)
+        waveSurfer.current.on('ready', function () {
+            setSongDuration(waveSurfer.current.getDuration())
+        })
+
+        return () => {
+            clearInterval(timeInterval.current);
+            waveSurfer.current.stop()
+            waveSurfer.current = null
+        }
     }, [])
+    useEffect(() => {
+        dispatch(updateSongTime((currentTime) ? currentTime.toFixed(2) : undefined))
+    }, [dispatch, currentTime])
+
+
+
+
+
+
+
 
     const playSong = () => {
-        waveSurfer.playPause()
+        if (waveSurfer.current.isPlaying()) {
+            clearInterval(timeInterval.current);
+        } else {
+            timeInterval.current = setInterval(() => {
+                setCurrentTime(waveSurfer.current.getCurrentTime());
+                console.log('playing')
+            }, 300);
+        }
+        waveSurfer.current.playPause()
     }
 
 
@@ -38,9 +72,13 @@ const SongContainerTop = ({ song }) => {
             <div className="image">
                 <img className='song-image' src={(song.Album?.imageUrl) ? song.Album.imageUrl : song.imageUrl}></img>
             </div>
-            <div id='waveform'>
+            <div ref={waveformRef}>
+                <div id='wave-timeline'>
 
+                </div>
             </div>
+            <div>Total time:{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
+            <div>Current time:{(currentTime) ? formatTime(currentTime) : '0:00'}</div>
         </div>
     )
 }
