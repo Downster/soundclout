@@ -43,6 +43,27 @@ router.post('/', requireAuth, validateComment, asyncHandler(async (req, res) => 
     res.json(comment);
 }))
 
+router.patch('/:commentId', requireAuth, validateComment, asyncHandler(async (req, res) => {
+    const { body } = req.body
+    const { commentId } = req.params
+    const comment = await db.Comment.findByPk(commentId, {
+        include: [
+            { model: db.User },
+        ]
+    })
+    await comment.update({
+        body
+    })
+    res.json(comment);
+}))
+
+router.delete('/:commentId', requireAuth, asyncHandler(async (req, res) => {
+    const { commentId } = req.params
+    const comment = await db.Comment.findByPk(commentId);
+    await comment.destroy()
+    res.json(comment.id)
+}))
+
 
 
 

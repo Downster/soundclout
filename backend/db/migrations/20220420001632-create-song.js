@@ -27,7 +27,7 @@ module.exports = {
       },
       title: {
         allowNull: false,
-        type: Sequelize.STRING(40)
+        type: Sequelize.STRING(100)
       },
       awsTitle: {
         allowNull: false,

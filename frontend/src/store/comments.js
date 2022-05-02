@@ -37,6 +37,7 @@ export const getComments = (songId) => async (dispatch) => {
     if (res.ok) {
         const comments = await res.json()
         dispatch(loadComment(comments))
+        return true
     } else {
         console.log('error')
     }
@@ -47,7 +48,6 @@ export const clearLoadedComments = () => async (dispatch) => {
 }
 
 export const createComment = (comment) => async (dispatch) => {
-    console.log('here')
     const res = await csrfFetch(`/api/comments`, {
         method: 'POST',
         headers: {
@@ -61,6 +61,33 @@ export const createComment = (comment) => async (dispatch) => {
         console.log(comment)
         dispatch(addComment(comment))
     }
+}
+
+export const removeComment = (commentId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${commentId}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        const commentId = await res.json()
+        dispatch(deleteComment(commentId))
+    }
+}
+
+export const editCurrentComment = (comment) => async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${comment.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    })
+
+    if (res.ok) {
+        const comment = await res.json()
+        dispatch(editComment(comment))
+    }
+
 }
 
 
@@ -78,6 +105,12 @@ const commentsReducer = (state = initialState, action) => {
             return nextState
         case ADD_COMMENT:
             nextState[action.comment.id] = action.comment
+            return nextState
+        case EDIT_COMMENT:
+            nextState[action.comment.id] = action.comment
+            return nextState
+        case DELETE_COMMENT:
+            delete nextState[action.commentId]
             return nextState
         case CLEAR_COMMENTS:
             const clearedState = {}

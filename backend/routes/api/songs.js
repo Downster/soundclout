@@ -73,7 +73,7 @@ router.post('/',
     requireAuth,
     asyncHandler(
         async (req, res) => {
-            const { url, title, userId, description, caption, private, awsTitle } = req.body
+            const { url, title, userId, description, caption, private, awsTitle, genre } = req.body
             if (!title) {
                 res.status = 400;
                 res.json({
@@ -98,7 +98,8 @@ router.post('/',
                 userId,
                 url,
                 awsTitle,
-                imageUrl: (imageLink) ? imageLink : 'https://imgur.com/hdrdJxY.jpg',
+                genreId: genre,
+                imageUrl: imageLink,
                 title,
                 description,
                 caption,
