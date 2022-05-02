@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { editCurrentComment } from "../../../store/comments"
+import { editCurrentComment, removeComment } from "../../../store/comments"
 
 const CommentCard = ({ sessionUser, comment }) => {
     const dispatch = useDispatch();
@@ -26,6 +26,11 @@ const CommentCard = ({ sessionUser, comment }) => {
         setIsEditing(false)
     }
 
+    const deleteComment = (e) => {
+        const { id } = comment;
+        dispatch(removeComment(id))
+    }
+
 
     return (
         <>
@@ -39,7 +44,7 @@ const CommentCard = ({ sessionUser, comment }) => {
                             <i className="fa-solid fa-pencil"></i>
                             Edit
                         </button>}
-                        {canEdit && <button>
+                        {canEdit && <button onClick={() => deleteComment()}>
                             <i className="fa-solid fa-trash"></i>
                             Delete
                         </button>}

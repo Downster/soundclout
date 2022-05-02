@@ -57,6 +57,13 @@ router.patch('/:commentId', requireAuth, validateComment, asyncHandler(async (re
     res.json(comment);
 }))
 
+router.delete('/:commentId', requireAuth, asyncHandler(async (req, res) => {
+    const { commentId } = req.params
+    const comment = await db.Comment.findByPk(commentId);
+    await comment.destroy()
+    res.json(comment.id)
+}))
+
 
 
 
