@@ -5,3 +5,8 @@
 .liked{
     color: red
 }
+
+.comment-marker{
+    display: absolute;
+    left: 20%;
+}

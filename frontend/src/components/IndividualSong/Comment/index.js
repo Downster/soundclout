@@ -55,32 +55,36 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     }
 
     return (
-        <div className="comment-form">
-            <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
-            <form onSubmit={(e) => submitComment(e)}>
-                <input
-                    type='text'
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder='Write a comment'
-                >
-                </input>
-            </form>
-            <button onClick={(isLiked) ? undoLike : submitLike}>
-                <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
-                {(isLiked) ? 'Liked' : 'Like'}
-            </button>
-            {canEdit &&
-                <button onClick={() => setShowEdit(!showEdit)}>
-                    <i className="fa-solid fa-pencil"></i>
-                    Edit
-                </button>
+        <>
+            {likes &&
+                <div className="comment-form">
+                    <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
+                    <form onSubmit={(e) => submitComment(e)}>
+                        <input
+                            type='text'
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            placeholder='Write a comment'
+                        >
+                        </input>
+                    </form>
+                    <button onClick={(isLiked) ? undoLike : submitLike}>
+                        <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
+                        {(isLiked) ? 'Liked' : 'Like'}
+                    </button>
+                    {canEdit &&
+                        <button onClick={() => setShowEdit(!showEdit)}>
+                            <i className="fa-solid fa-pencil"></i>
+                            Edit
+                        </button>
+                    }
+                    <button onClick={remove}>
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
+                    </button>
+                </div>
             }
-            <button onClick={remove}>
-                <i class="fa-solid fa-trash"></i>
-                Delete
-            </button>
-        </div>
+        </>
     )
 }
 

@@ -47,7 +47,6 @@ export const clearLoadedComments = () => async (dispatch) => {
 }
 
 export const createComment = (comment) => async (dispatch) => {
-    console.log('here')
     const res = await csrfFetch(`/api/comments`, {
         method: 'POST',
         headers: {
@@ -61,6 +60,23 @@ export const createComment = (comment) => async (dispatch) => {
         console.log(comment)
         dispatch(addComment(comment))
     }
+}
+
+export const editCurrentComment = (comment) => async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${comment.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    })
+
+    if (res.ok) {
+        const comment = await res.json()
+        console.log(comment)
+        dispatch(editComment(comment))
+    }
+
 }
 
 
@@ -77,6 +93,9 @@ const commentsReducer = (state = initialState, action) => {
             })
             return nextState
         case ADD_COMMENT:
+            nextState[action.comment.id] = action.comment
+            return nextState
+        case EDIT_COMMENT:
             nextState[action.comment.id] = action.comment
             return nextState
         case CLEAR_COMMENTS:

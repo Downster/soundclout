@@ -21,6 +21,7 @@ module.exports = {
       time: {
         allowNull: false,
         type: Sequelize.FLOAT,
+        defaultValue: 0.00
       },
       body: {
         type: Sequelize.TEXT
