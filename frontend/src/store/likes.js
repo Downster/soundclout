@@ -15,12 +15,54 @@ const addLike = (like) => ({
     like
 })
 
-const removeLike = (likeId) => ({
+const deleteLike = (like) => ({
     type: REMOVE_LIKE,
-    likeId
+    like
 })
 
 
-export const getUserLikes = (userID) => async (dispatch) => {
+export const getAllLikes = () => async (dispatch) => {
     const res = await csrfFetch('/api/likes')
+
+    if (res.ok) {
+        const likes = await res.json()
+        console.log(likes)
+        dispatch(getLikes(likes))
+    }
 }
+
+export const removeLike = (likeId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/likes/${likeId}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        const like = await res.json()
+        dispatch(deleteLike(like))
+        return true
+    } else {
+        return false
+    }
+}
+const initialState = {
+};
+const likesReducer = (state = initialState, action) => {
+    const nextState = { ...state }
+    switch (action.type) {
+        case GET_LIKES:
+            action.likes.forEach((like) => {
+                if (!nextState[like.songId]) {
+                    nextState[like.songId] = {}
+                }
+                nextState[like.songId][like.userId] = like
+            })
+            return nextState
+        case REMOVE_LIKE:
+            delete nextState[action.like.songId][action.like.userId]
+            return nextState
+        default:
+            return state
+    }
+}
+
+export default likesReducer;

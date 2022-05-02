@@ -1,15 +1,26 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { deleteSong } from "../../../store/songs"
 import { removeSong } from "../../../store/selectedSong"
 import { useHistory } from "react-router-dom"
 import { createComment } from "../../../store/comments"
 import { useSelector } from "react-redux"
+import { removeLike } from "../../../store/likes"
+
 const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const history = useHistory()
     const [comment, setComment] = useState('')
+    const [isLiked, setIsLiked] = useState(false)
     const dispatch = useDispatch()
     const time = useSelector(state => state.selectedSong.time)
+    const likes = useSelector(state => state.likes[song.id])
+
+    useEffect(() => {
+        if (likes && likes[sessionUser.id]) {
+            setIsLiked(true)
+        }
+    }, [])
+
     const submitComment = (e) => {
         console.log(time)
         e.preventDefault()
@@ -28,6 +39,17 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
         history.push('/')
     }
 
+    const submitLike = () => {
+
+    }
+
+    const undoLike = () => {
+        const done = dispatch(removeLike(likes[sessionUser.id].id))
+        if (done) {
+            setIsLiked(false)
+        }
+    }
+
     return (
         <div className="comment-form">
             <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
@@ -40,9 +62,9 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                 >
                 </input>
             </form>
-            <button>
-                <i className="fa-solid fa-heart"></i>
-                Like
+            <button onClick={(isLiked) ? undoLike : submitLike}>
+                <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
+                {(isLiked) ? 'Liked' : 'Like'}
             </button>
             <button onClick={() => setShowEdit(!showEdit)}>
                 <i className="fa-solid fa-pencil"></i>

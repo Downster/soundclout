@@ -5,11 +5,11 @@ const RECEIVE_SONG = 'songs/RECEIVE_SONG';
 const EDIT_SONG = 'songs/EDIT_SONG';
 const DELETE_SONG = 'songs/DELETE_SONG';
 
+
 const loadSongs = (songs) => ({
     type: LOAD_SONGS,
     songs
 })
-
 
 const receiveSong = (song) => ({
     type: RECEIVE_SONG,

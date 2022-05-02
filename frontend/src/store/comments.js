@@ -4,6 +4,7 @@ const LOAD_COMMENTS = 'comments/LOAD_SONGS'
 const ADD_COMMENT = 'comments/ADD_COMMENT'
 const EDIT_COMMENT = 'comments/EDIT_COMMENT'
 const DELETE_COMMENT = 'comments/DELETE_COMMENT'
+const CLEAR_COMMENTS = 'comments/CLEAR_COMMENTS'
 
 const loadComment = (comments) => ({
     type: LOAD_COMMENTS,
@@ -25,6 +26,10 @@ const deleteComment = (commentId) => ({
     commentId
 })
 
+const clearComments = () => ({
+    type: CLEAR_COMMENTS
+})
+
 
 export const getComments = (songId) => async (dispatch) => {
     const res = await csrfFetch(`/api/comments/${songId}`)
@@ -32,7 +37,13 @@ export const getComments = (songId) => async (dispatch) => {
     if (res.ok) {
         const comments = await res.json()
         dispatch(loadComment(comments))
+    } else {
+        console.log('error')
     }
+}
+
+export const clearLoadedComments = () => async (dispatch) => {
+    dispatch(clearComments())
 }
 
 export const createComment = (comment) => async (dispatch) => {
@@ -68,6 +79,9 @@ const commentsReducer = (state = initialState, action) => {
         case ADD_COMMENT:
             nextState[action.comment.id] = action.comment
             return nextState
+        case CLEAR_COMMENTS:
+            const clearedState = {}
+            return clearedState
         default:
             return state;
     }

@@ -4,7 +4,7 @@ import SongContainerTop from "./SongContainerTop"
 import { useEffect } from "react"
 import Comment from "./Comment"
 import { addSelectedSong } from '../../store/selectedSong'
-import { getComments } from '../../store/comments'
+import { clearLoadedComments, getComments } from '../../store/comments'
 import './individualSong.css'
 import ArtistCard from "./ArtistCard"
 
@@ -18,6 +18,10 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
     useEffect(() => {
         dispatch(addSelectedSong(song))
         dispatch(getComments(songId))
+
+        return () => {
+            dispatch(clearLoadedComments())
+        }
     }, [dispatch])
 
 
