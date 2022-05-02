@@ -15,6 +15,7 @@ import EditOrUploadSong from "./components/UploadSongForm";
 import SplashPage from "./components/SplashPage";
 import SignupFormModal from "./components/SignUpFormModal";
 import { getAllLikes } from './store/likes'
+import { getAllGenres } from "./store/genres";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllLikes())
+    dispatch(getAllGenres())
   }, [dispatch]);
 
 

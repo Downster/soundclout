@@ -11,6 +11,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const history = useHistory()
     const [comment, setComment] = useState('')
     const [isLiked, setIsLiked] = useState(false)
+    const [canEdit, setCanEdit] = useState(false)
     const dispatch = useDispatch()
     const time = useSelector(state => state.selectedSong.time)
     const likes = useSelector(state => state.likes[song.id])
@@ -18,6 +19,9 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     useEffect(() => {
         if (likes && likes[sessionUser.id]) {
             setIsLiked(true)
+        }
+        if (sessionUser.id === song.userId) {
+            setCanEdit(true)
         }
     }, [])
 
@@ -66,10 +70,12 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                 <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
                 {(isLiked) ? 'Liked' : 'Like'}
             </button>
-            <button onClick={() => setShowEdit(!showEdit)}>
-                <i className="fa-solid fa-pencil"></i>
-                Edit
-            </button>
+            {canEdit &&
+                <button onClick={() => setShowEdit(!showEdit)}>
+                    <i className="fa-solid fa-pencil"></i>
+                    Edit
+                </button>
+            }
             <button onClick={remove}>
                 <i class="fa-solid fa-trash"></i>
                 Delete

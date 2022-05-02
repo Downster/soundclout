@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import commentsReducer from './comments';
+import genresReducer from './genres';
 import likesReducer from './likes';
 import selectedSongReducer from './selectedSong';
 import sessionReducer from './session';
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     currentSong: songPlayReducer,
     selectedSong: selectedSongReducer,
     comments: commentsReducer,
-    likes: likesReducer
+    likes: likesReducer,
+    genres: genresReducer
 });
 
 let enhancer;

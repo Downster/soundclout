@@ -50,6 +50,7 @@ const likesReducer = (state = initialState, action) => {
     const nextState = { ...state }
     switch (action.type) {
         case GET_LIKES:
+            console.log(action)
             action.likes.forEach((like) => {
                 if (!nextState[like.songId]) {
                     nextState[like.songId] = {}
