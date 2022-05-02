@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import WaveSurfer from 'wavesurfer.js';
 import MarkersPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.markers.min.js';
 import { formatTime } from "../../../utils/formatTime";
-import { updateSongTime } from "../../../store/selectedSong";
+import { removeSong, updateSongTime } from "../../../store/selectedSong";
 
 
-const SongContainerTop = ({ sessionUser, song, markersArray }) => {
+const SongContainerTop = ({ sessionUser, song, comments }) => {
+    console.log(comments)
     const dispatch = useDispatch()
     const [songDuration, setSongDuration] = useState();
     const [currentTime, setCurrentTime] = useState();
@@ -15,6 +16,7 @@ const SongContainerTop = ({ sessionUser, song, markersArray }) => {
     const waveformRef = useRef();
     const timeInterval = useRef()
     const waveSurfer = useRef();
+    const markersRef = useRef();
     //setup markers array to push marker objects to
 
 
@@ -22,8 +24,24 @@ const SongContainerTop = ({ sessionUser, song, markersArray }) => {
 
 
     useEffect(() => {
+        markersRef.current = new Set()
+        for (let comment in comments) {
+            const userPic = comments[comment].User.imageUrl
+            const commentTime = comments[comment].time
+            let imageUrl = userPic
+            let userImage = document.createElement('img');
+            userImage.src = imageUrl
+            userImage.width = 20
+            userImage.height = 20
+            userImage.style.zIndex = 100;
+            const markerObj = {
+                time: commentTime,
+                markerElement: imageUrl
+            }
+            markersRef.current.add(JSON.stringify(markerObj))
+        }
         const markers = []
-        markersArray.forEach((marker) => {
+        markersRef.current.forEach((marker) => {
             const parsed = JSON.parse(marker)
             let userImage = document.createElement('img');
             userImage.src = parsed.markerElement
@@ -33,6 +51,7 @@ const SongContainerTop = ({ sessionUser, song, markersArray }) => {
             parsed.markerElement = userImage;
             markers.push(parsed)
         })
+        console.log(markersRef.current)
         waveSurfer.current = WaveSurfer.create({
             container: waveformRef.current,
             waveColor: 'grey',
@@ -55,6 +74,7 @@ const SongContainerTop = ({ sessionUser, song, markersArray }) => {
             clearInterval(timeInterval.current);
             waveSurfer.current.stop()
             waveSurfer.current = null
+            dispatch(removeSong())
         }
     }, [])
     useEffect(() => {

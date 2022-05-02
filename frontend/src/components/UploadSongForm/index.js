@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSong } from '../../store/songs';
 import { v4 as uuidv4 } from 'uuid';
+import genreNameToNum from "../../utils/genreNameToNum";
 import AWS from 'aws-sdk'
 import './uploadSong.css'
 
@@ -24,13 +25,19 @@ const UploadSongForm = ({ sessionUser }) => {
     const [description, setDescription] = useState('')
     const [caption, setCaption] = useState('')
     const [privacy, setPrivacy] = useState('public')
+    const [genre, setGenre] = useState('None')
+    const genres = useSelector(state => state.genres)
+
+
     const handleSubmit = (e) => {
+
         e.preventDefault();
         const formData = new FormData()
         formData.append('url', songUrl)
         formData.append('awsTitle', awsTitle)
         formData.append('userId', sessionUser.id)
         formData.append('title', title)
+        formData.append('genre', genreNameToNum(genre))
         formData.append('image', image)
         formData.append('description', description)
         formData.append('caption', caption)
@@ -105,6 +112,19 @@ const UploadSongForm = ({ sessionUser }) => {
                         onChange={(e) => updateFile(e, 'song')}
                     />
                     <label>Genre</label>
+                    <select
+                        onChange={({ target: { value } }) => setGenre(value)}
+                        value={genre}
+                    >
+                        {Object.values(genres).map((genre) => (
+                            <option
+                                key={genre.id}
+                                value={genre.name}
+                            >
+                                {genre.name}
+                            </option>
+                        ))}
+                    </select>
                     <label>Description</label>
                     <textarea
                         value={description}
