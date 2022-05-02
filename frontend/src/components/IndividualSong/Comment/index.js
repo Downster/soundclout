@@ -6,7 +6,8 @@ import { addSelectedSong, removeSong } from "../../../store/selectedSong"
 import { useHistory } from "react-router-dom"
 import { createComment } from "../../../store/comments"
 import { useSelector } from "react-redux"
-import { removeLike } from "../../../store/likes"
+import { removeLike, addOneLike } from "../../../store/likes"
+import './comment.css'
 
 const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const history = useHistory()
@@ -51,7 +52,14 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     }
 
     const submitLike = () => {
-
+        const like = {
+            userId: sessionUser.id,
+            songId: song.id
+        }
+        const done = dispatch(addOneLike(like))
+        if (done) {
+            setIsLiked(true)
+        }
     }
 
     const undoLike = () => {
@@ -63,31 +71,37 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
 
     return (
         <>
-            <div className="comment-form">
-                <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
-                <form onSubmit={(e) => submitComment(e)}>
-                    <input
-                        type='text'
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder='Write a comment'
-                    >
-                    </input>
-                </form>
-                <button onClick={(isLiked) ? undoLike : submitLike}>
-                    <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
-                    {(isLiked) ? 'Liked' : 'Like'}
-                </button>
-                {canEdit &&
-                    <button onClick={() => setShowEdit(!showEdit)}>
-                        <i className="fa-solid fa-pencil"></i>
-                        Edit
+            <div className="comment-container">
+                <div className="comment-form">
+
+                    <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
+                    <form onSubmit={(e) => submitComment(e)}>
+                        <input
+                            type='text'
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            placeholder='Write a comment'
+                        >
+                        </input>
+                    </form>
+                </div>
+                <div className="comment-buttons">
+
+                    <button onClick={(isLiked) ? undoLike : submitLike}>
+                        <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
+                        {(isLiked) ? 'Liked' : 'Like'}
                     </button>
-                }
-                <button onClick={remove}>
-                    <i class="fa-solid fa-trash"></i>
-                    Delete
-                </button>
+                    {canEdit &&
+                        <button onClick={() => setShowEdit(!showEdit)}>
+                            <i className="fa-solid fa-pencil"></i>
+                            Edit
+                        </button>
+                    }
+                    <button onClick={remove}>
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
+                    </button>
+                </div>
             </div>
         </>
     )

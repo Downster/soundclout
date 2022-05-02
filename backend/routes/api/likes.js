@@ -19,6 +19,15 @@ router.delete('/:likeId', requireAuth, asyncHandler(async (req, res) => {
     res.json(like)
 }))
 
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
+    const { songId, userId } = req.body;
+    const like = await db.Likes.create({
+        userId,
+        songId
+    })
+    res.json(like)
+}))
+
 
 
 module.exports = router

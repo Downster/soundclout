@@ -135,6 +135,19 @@
     background-repeat: no-repeat;
     background-position: right center;
 }
+.search-bar{
+    width: 392.17px;
+    height: 28px;
+    padding: 5px 7px 7px;
+    color: #666;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 20px;
+    border: none;
+    background-image: url('./images/SearchIcon1.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
 
 .profile-name{
     font-family: Interstate,Lucida Grande,Arial,sans-serif;

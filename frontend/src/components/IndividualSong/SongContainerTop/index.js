@@ -5,13 +5,14 @@ import WaveSurfer from 'wavesurfer.js';
 import MarkersPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.markers.min.js';
 import { formatTime } from "../../../utils/formatTime";
 import { removeSong, updateSongTime } from "../../../store/selectedSong";
+import './songContainerTop.css'
 
 
 const SongContainerTop = ({ sessionUser, song, comments }) => {
-    console.log(comments)
     const dispatch = useDispatch()
     const [songDuration, setSongDuration] = useState();
     const [currentTime, setCurrentTime] = useState();
+    const [isPlaying, setIsPlaying] = useState(false)
     const { songId } = useParams()
     const waveformRef = useRef();
     const timeInterval = useRef()
@@ -36,6 +37,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             userImage.style.zIndex = 100;
             const markerObj = {
                 time: commentTime,
+                label: comments[comment].body,
                 markerElement: imageUrl
             }
             markersRef.current.add(JSON.stringify(markerObj))
@@ -51,14 +53,15 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             parsed.markerElement = userImage;
             markers.push(parsed)
         })
-        console.log(markersRef.current)
         waveSurfer.current = WaveSurfer.create({
             container: waveformRef.current,
-            waveColor: 'grey',
+            waveColor: 'white',
             progressColor: '#f50',
             cursorColor: '#f50',
             // This parameter makes the waveform look like SoundCloud's player
-            barWidth: 3,
+            barWidth: 2,
+            height: 100,
+            hideScrollbar: true,
             plugins: [
                 MarkersPlugin.create({
                     markers: markers
@@ -89,12 +92,12 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
 
 
     const playSong = () => {
+        setIsPlaying(!isPlaying)
         if (waveSurfer.current.isPlaying()) {
             clearInterval(timeInterval.current);
         } else {
             timeInterval.current = setInterval(() => {
                 setCurrentTime(waveSurfer.current.getCurrentTime());
-                console.log('playing')
             }, 300);
         }
         waveSurfer.current.playPause()
@@ -107,24 +110,32 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         <>
             {song &&
                 <div className="top-song-container">
-                    <div className="play-info">
-                        <img className='detail-play-button' src={require('./images/play-button.png')} onClick={playSong} />
-                        <h1 className="song-title">{song.title}</h1>
-                        <Link to={`/${song.User?.username}`} className="song-creator">{song.User?.username}</Link>
-                    </div>
-                    <div className="uploaded-genre">
+                    <div className="left-div">
+                        <div className="play-info">
+                            <img className='detail-play-button' src={(isPlaying) ? require('./images/pause-button.png') : require('./images/play-button.png')} onClick={playSong} />
+                            <div className="artist-song-info">
 
-                    </div>
-                    <div className="image">
-                        <img className='song-image' src={(song.Album?.imageUrl) ? song.Album.imageUrl : song.imageUrl}></img>
-                    </div>
-                    <div ref={waveformRef}>
-                        <div id='wave-timeline'>
+                                <h1 className="song-title">{song.title}</h1>
+                                <Link to={`/${song.User?.username}`} className="song-creator">{song.User?.username}</Link>
+                            </div>
+                        </div>
+                        <div className="wavebar-div">
+                            <div id='wavesurfer' ref={waveformRef}>
+                            </div>
+                            <div className="total-time-show">{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
+                            <div className="current-time-show">{(currentTime) ? formatTime(currentTime) : null}</div>
 
                         </div>
+
                     </div>
-                    <div>Total time:{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
-                    <div>Current time:{(currentTime) ? formatTime(currentTime) : '0:00'}</div>
+                    <div className="right-div">
+                        <div className="uploaded-genre">
+
+                        </div>
+                        <div className="top-song-image">
+                            <img className='individual-song-image' src={(song.Album?.imageUrl) ? song.Album.imageUrl : song.imageUrl}></img>
+                        </div>
+                    </div>
                 </div>
             }
         </>

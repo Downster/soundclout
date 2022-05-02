@@ -1,0 +1,10 @@
+.comment-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-form{
+    display: flex;
+    width: 817px;
+    height: 40px;
+}

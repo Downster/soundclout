@@ -1,0 +1,96 @@
+.top-song-container{
+    display: flex;
+    width: 1240px;
+    height: 380px;
+    justify-content: space-between;
+    background: linear-gradient(45deg, #e0dad8, #99988c);
+    padding-right: 20px;
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.song-title{
+    font-size: 23px;
+    background-color: #2a2827;
+    color: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.wavesurfer-marker div:nth-of-type(2) span{
+    opacity: 0;
+}
+.wavesurfer-marker div:nth-of-type(2){
+    margin-bottom: 15px;
+}
+
+.wavesurfer-marker div:nth-of-type(2) span:hover{
+    opacity: 1;
+}
+
+
+
+.song-creator{
+    font-size: 15px;
+    background-color: #2a2827;
+    color: #ccc;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-decoration: none;
+    margin-top: 5px;
+    width: fit-content;
+
+}
+.play-info{
+    display: flex;
+    gap: 5px;
+}
+.artist-song-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-play-button{
+    width: 80px;
+    height: 80px;
+}
+.left-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.top-song-image{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.individual-song-image{
+    width: 340px;
+    height: 340px;
+}
+
+#wavesurfer{
+    width:840px;
+    height: 100px;
+    
+}
+
+.total-time-show{
+    position: absolute;
+    right: 35%;
+    top:30%;
+    z-index: 2000;
+    font-size: 10px;
+    background-color: #2a2827;
+    color: #8c8c8c;
+}
+
+.current-time-show{
+    position: absolute;
+    z-index: 2000;
+    font-size: 10px;
+    background-color: #2a2827;
+    top:30%;
+    color: #f50;
+}
