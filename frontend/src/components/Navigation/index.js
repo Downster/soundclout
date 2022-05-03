@@ -13,7 +13,7 @@ function Navigation({ setSignIn, setSignUp }) {
     let sessionLinks;
     if (sessionUser) {
         search = (
-            <input className='search-bar' placeholder='Search'></input>
+            <DynamicSearch className='search-bar' placeHolder='Search' />
         )
 
         sessionLogo = (
@@ -31,7 +31,7 @@ function Navigation({ setSignIn, setSignUp }) {
         );
     } else {
         search = (
-            <DynamicSearch className='search-bar unauth' placeholder='Search for artists, bands, tracks, and podcasts' />
+            <DynamicSearch className='search-bar unauth' placeHolder='Search for artists, bands, tracks, and podcasts' />
         )
         sessionLogo = (
             <>
@@ -54,9 +54,9 @@ function Navigation({ setSignIn, setSignUp }) {
             <NavLink className='navbar-link-about' to='/about'>About</NavLink>
             <NavLink className='navbar-link-discover' to='/library'>Library</NavLink>
             <div className='header-search'>
-                <form className='header-search-form'>
+                <div className='header-search-form'>
                     {search}
-                </form>
+                </div>
             </div>
             {sessionLinks}
         </div>

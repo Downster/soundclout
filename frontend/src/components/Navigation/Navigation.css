@@ -5,6 +5,11 @@
     justify-content: center;
 }
 
+.user-dropdown{
+    position: absolute;
+    
+}
+
 .navbar-signin-button{
     display: flex;
     font-size: 13px;

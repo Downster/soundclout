@@ -1,28 +1,32 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDetectOutsideClick } from "../detectClick/useDetectOutsideClick";
-import SearchContainer from "../searchContainer/searchContainer";
+import { useDetectOutsideClick } from "../DetectClick"
+import SearchContainer from "../SearchContainer"
+import { csrfFetch } from "../../store/csrf";
 
 const DynamicSearch = ({ className, placeHolder }) => {
     const dropdownRef = useRef(null);
     const [myOptions, setMyOptions] = useState({
-        items: [],
+        items: new Set(),
         searchTerm: "",
     });
     const [value, setValue] = useState("");
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
     useEffect(() => {
-        fetch("/api/search")
+        csrfFetch("/api/search")
             .then((response) => {
                 if (response.ok) {
                     return response.json();
                 }
             })
             .then((data) => {
+                console.log(data)
                 if (!myOptions.items.length) {
-                    for (let i = 0; i < data.length; i++) {
-                        myOptions.items.push(data[i]);
+                    for (let i = 0; i < data.users.length; i++) {
+                        myOptions.items.add(data.users[i].username);
+                    }
+                    for (let i = 0; i < data.songs.length; i++) {
+                        myOptions.items.add(data.songs[i].title);
                     }
                     setMyOptions(myOptions);
                 } else {
@@ -32,28 +36,18 @@ const DynamicSearch = ({ className, placeHolder }) => {
     }, []);
 
     const getDataFromAPI = () => {
-        console.log("Options Fetched from API");
-
-        fetch("/api/search")
+        csrfFetch("/api/search")
             .then((response) => {
                 if (response.ok) {
                     return response.json();
                 }
             })
             .then((data) => {
-                //console.log(data);
-                /* figure out a way to compare in 0(n) time???  */
-                for (let i = 0; i < data.length; i++) {
-                    let shouldPush = true;
-                    for (let j = 0; j < data.length; j++) {
-                        if (data[j].content === data[i].content) {
-                            shouldPush = false;
-                            break;
-                        }
-                    }
-                    if (shouldPush) {
-                        myOptions.items.push(data[i]);
-                    }
+                for (let i = 0; i < data.users.length; i++) {
+                    myOptions.items.add(data.users[i].username);
+                }
+                for (let i = 0; i < data.songs.length; i++) {
+                    myOptions.items.add(data.songs[i].title);
                 }
                 setMyOptions(myOptions);
             });
@@ -66,10 +60,13 @@ const DynamicSearch = ({ className, placeHolder }) => {
     };
 
     const dynamicSearch = () => {
-        if (myOptions.todos !== undefined) {
-            return myOptions.items.filter((todo) =>
-                todo.content.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+        if (myOptions.items !== undefined) {
+            const itemsArray = [...myOptions.items]
+            const filtered = itemsArray.filter((item) =>
+                item.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
             );
+            console.log(filtered)
+            return filtered
         } else {
             return [];
         }
