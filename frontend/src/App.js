@@ -41,35 +41,33 @@ function App() {
       {showEdit && <EditSongModal sessionUser={sessionUser} setShowEdit={setShowEdit} />}
       {showSignIn && <LoginFormModal setSignIn={setSignIn} />}
       {showSignUp && <SignupFormModal setSignUp={setSignUp} />}
-      {isLoaded && (
 
-        <Switch>
-          <Route exact path='/'>
-            {(sessionUser) ? <Redirect to='/discover' /> : <SplashPage isLoaded={isLoaded} hasSong={hasSong} setSignIn={setSignIn} setSignUp={setSignUp} />}
-            <SongPlayer />
-          </Route>
-          <Route path='/upload'>
-            <Navigation isLoaded={isLoaded} />
-            {(sessionUser) ?
-              <EditOrUploadSong sessionUser={sessionUser} options={'upload'} /> : <h1>Please login</h1>
-            }
-            <SongPlayer />
-          </Route>
-          <Route path='/songs/:songId'>
-            <Navigation isLoaded={isLoaded} />
-            <IndividualSong sessionUser={sessionUser} setShowEdit={setShowEdit} showEdit={showEdit} />
-            <SongPlayer />
-          </Route>
-          <Route path='/discover'>
-            <Navigation isLoaded={isLoaded} />
-            <ShowSongs />
-            <SongPlayer />
-          </Route>
-          <Route path='/about'>
-            <Navigation isLoaded={isLoaded} />
-          </Route>
-        </Switch>
-      )}
+      <Switch>
+        <Route exact path='/'>
+          {(sessionUser) ? <Redirect to='/discover' /> : <SplashPage isLoaded={isLoaded} hasSong={hasSong} setSignIn={setSignIn} setSignUp={setSignUp} />}
+          <SongPlayer />
+        </Route>
+        <Route path='/upload'>
+          <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+          {(sessionUser) ?
+            <EditOrUploadSong sessionUser={sessionUser} options={'upload'} /> : <h1>Please login</h1>
+          }
+          <SongPlayer />
+        </Route>
+        <Route path='/songs/:songId'>
+          <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+          <IndividualSong sessionUser={sessionUser} setShowEdit={setShowEdit} showEdit={showEdit} />
+          <SongPlayer />
+        </Route>
+        <Route path='/discover'>
+          <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+          <ShowSongs />
+          <SongPlayer />
+        </Route>
+        <Route path='/about'>
+          <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+        </Route>
+      </Switch>
 
     </>
   );

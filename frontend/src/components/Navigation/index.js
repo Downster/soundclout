@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import { useDispatch } from 'react-redux'
-function Navigation({ isLoaded, setSignIn, setSignUp }) {
+function Navigation({ setSignIn, setSignUp }) {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch()
     let search;
@@ -39,8 +39,8 @@ function Navigation({ isLoaded, setSignIn, setSignUp }) {
         )
         sessionLinks = (
             <>
-                <button className='navbar-signin-button' to="/login" onClick={setSignIn}>Sign In</button>
-                <button className='navbar-create-button' to="/signup" onClick={setSignUp}>Create Account</button>
+                <button className='navbar-signin-button' to="/login" onClick={() => setSignIn(true)}>Sign In</button>
+                <button className='navbar-create-button' to="/signup" onClick={() => setSignUp(true)}>Create Account</button>
                 <button className='navbar-upload-button' to='/upload'>Upload</button>
             </>
         );
@@ -57,7 +57,7 @@ function Navigation({ isLoaded, setSignIn, setSignUp }) {
                     {search}
                 </form>
             </div>
-            {isLoaded && sessionLinks}
+            {sessionLinks}
         </div>
     );
 }
