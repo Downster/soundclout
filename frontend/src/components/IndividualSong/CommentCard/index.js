@@ -9,7 +9,7 @@ const CommentCard = ({ sessionUser, comment }) => {
     const [editText, setEditText] = useState(comment.body)
 
     useEffect(() => {
-        if (sessionUser.id === comment.userId) {
+        if (sessionUser && sessionUser.id === comment.userId) {
             setCanEdit(true)
         }
 

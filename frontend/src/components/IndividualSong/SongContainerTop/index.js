@@ -134,7 +134,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
                             <div id='wavesurfer' ref={waveformRef}>
                             </div>
                             <div className="total-time-show">{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
-                            <div className="current-time-show">{(currentTime) ? formatTime(currentTime) : null}</div>
+                            <div className="current-time-show">{(currentTime) ? formatTime(currentTime) : ''}</div>
 
                         </div>
 
