@@ -15,17 +15,13 @@ function SignupFormModal({ setSignUp }) {
 
     if (sessionUser) return <Redirect to="/" />;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
+            const result = await dispatch(sessionActions.signup({ email, username, password }))
+            setErrors(result.errors)
         }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
     };
     const closeModal = () => {
         setSignUp(false)

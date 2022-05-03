@@ -61,7 +61,9 @@ function App() {
         </Route>
         <Route path='/discover'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
-          <ShowSongs />
+          <div className="discover-songs">
+            <ShowSongs />
+          </div>
           <SongPlayer />
         </Route>
         <Route path='/about'>

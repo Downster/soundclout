@@ -1,10 +1,12 @@
-import { useParams, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import WaveSurfer from 'wavesurfer.js';
 import MarkersPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.markers.min.js';
 import { formatTime } from "../../../utils/formatTime";
+import { Howl } from 'howler'
 import { removeSong, updateSongTime } from "../../../store/selectedSong";
+import { pauseSong, receivePlaySong, resumeSong, clearSong, setDuration } from "../../../store/songPlay";
 import './songContainerTop.css'
 
 
@@ -14,7 +16,6 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
     const [songDuration, setSongDuration] = useState();
     const [currentTime, setCurrentTime] = useState();
     const [isPlaying, setIsPlaying] = useState(false)
-    const { songId } = useParams()
     const waveformRef = useRef();
     const timeInterval = useRef()
     const waveSurfer = useRef();
@@ -74,11 +75,14 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         waveSurfer.current.load(song.url)
         waveSurfer.current.on('ready', function () {
             setSongDuration(waveSurfer.current.getDuration())
-            if (currentSong.songId === song.id) {
+            if (currentSong.songId === song.id && currentSong.isPlaying) {
                 waveSurfer.current.skip(currentSong.song.seek())
                 waveSurfer.current.playPause()
                 waveSurfer.current.setVolume(0)
                 setIsPlaying(true)
+            } else if (currentSong.songId === song.id && currentSong.isPaused) {
+                waveSurfer.current.skip(currentSong.song.seek())
+                waveSurfer.current.setVolume(0)
             }
         })
 
@@ -86,22 +90,34 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         return () => {
             clearInterval(timeInterval.current);
             waveSurfer.current.stop()
+            waveSurfer.current.destroy()
             waveSurfer.current = null
             dispatch(removeSong())
+            setIsPlaying(false)
         }
-    }, [])
+    }, [comments, currentSong.isPlaying, currentSong.song, currentSong.songId, dispatch, song.id, song.url])
     useEffect(() => {
         dispatch(updateSongTime((currentTime) ? currentTime.toFixed(2) : undefined))
     }, [dispatch, currentTime])
 
 
-
-
-
-
-
-
     const playSong = () => {
+        if (currentSong.songId === song.id && currentSong.isPaused) {
+            dispatch(resumeSong())
+        } else {
+            const sound = new Howl({
+                src: [song.url],
+                html5: true,
+                onend: function () {
+                    dispatch(clearSong())
+                },
+                onload: function () {
+                    dispatch(setDuration(sound._duration))
+                }
+            });
+            console.log(song)
+            dispatch(receivePlaySong(sound, song.id))
+        }
         setIsPlaying(!isPlaying)
         if (waveSurfer.current.isPlaying()) {
             clearInterval(timeInterval.current);
@@ -114,6 +130,11 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         waveSurfer.current.setVolume(0)
     }
 
+    const pauseCurrentSong = () => {
+        waveSurfer.current.playPause()
+        dispatch(pauseSong())
+    }
+
 
 
 
@@ -123,10 +144,14 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
                 <div className="top-song-container">
                     <div className="left-div">
                         <div className="play-info">
-                            <img className='detail-play-button' src={(isPlaying) ? require('./images/pause-button.png') : require('./images/play-button.png')} onClick={playSong} />
+                            <img className='detail-play-button'
+                                alt={(isPlaying) ? 'Play song' : 'Pause song'}
+                                src={(isPlaying) ? require('./images/pause-button.png') : require('./images/play-button.png')}
+                                onClick={(isPlaying) ? pauseCurrentSong : playSong} />
                             <div className="artist-song-info">
 
                                 <h1 className="song-title">{song.title}</h1>
+                                <h2 className="song-creator">{song.artist}</h2>
                                 <Link to={`/${song.User?.username}`} className="song-creator">{song.User?.username}</Link>
                             </div>
                         </div>

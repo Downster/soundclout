@@ -72,41 +72,49 @@ router.post('/',
     ]),
     requireAuth,
     asyncHandler(
-        async (req, res) => {
-            const { url, title, userId, description, caption, private, awsTitle, genre } = req.body
-            if (!title) {
-                res.status = 400;
-                res.json({
-                    'Title': 'Bad Request',
-                    'Errors': 'Please input a title'
-                })
-            }
-            let imageName,
-                imageFile,
-                imageType,
-                imageLink;
-            //create image name with unique ID to prevent having files with the same name
-            if (req.files.image) {
-                imageName = crypto.randomUUID() + req.files.image[0].originalname
-                imageFile = req.files.image[0].buffer
-                imageType = req.files.image[0].mimetype
-                imageLink = await uploadImage(imageName, imageType, imageFile)
-                console.log(imageLink)
-            }
+        async (req, res, next) => {
+            const { url, title, userId, description, caption, private, awsTitle, genre, artist } = req.body
+            if (!title || !artist) {
+                const errors = []
+                const error = new Error('Invalid input')
+                if (!artist) {
+                    errors.push('Please provide an artist')
+                }
+                if (!title) {
+                    errors.push('Please provide a title')
+                }
+                error.title = "Invalid input";
+                error.errors = errors
+                error.status = 400;
+                next(error)
+            } else {
+                let imageName,
+                    imageFile,
+                    imageType,
+                    imageLink;
+                //create image name with unique ID to prevent having files with the same name
+                if (req.files.image) {
+                    imageName = crypto.randomUUID() + req.files.image[0].originalname
+                    imageFile = req.files.image[0].buffer
+                    imageType = req.files.image[0].mimetype
+                    imageLink = await uploadImage(imageName, imageType, imageFile)
+                    console.log(imageLink)
+                }
 
-            const song = await db.Song.create({
-                userId,
-                url,
-                awsTitle,
-                genreId: genre,
-                imageUrl: imageLink,
-                title,
-                description,
-                caption,
-                private: (private === 'public') ? false : true
-            })
-            console.log(song)
-            res.json(song)
+                const song = await db.Song.create({
+                    userId,
+                    url,
+                    awsTitle,
+                    genreId: genre,
+                    imageUrl: imageLink,
+                    title,
+                    artist,
+                    description,
+                    caption,
+                    private: (private === 'public') ? false : true
+                })
+                res.json(song)
+            }
         }))
 
 module.exports = router

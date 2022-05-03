@@ -21,6 +21,7 @@
     justify-content: center;
     align-items: center;
     color: #fff;
+    cursor:pointer;
 }
 .navbar-create-button{
     display: flex;
@@ -38,6 +39,7 @@
     justify-content: center;
     align-items: center;
     color: #fff;
+    cursor:pointer;
 }
 
 .navbar-upload-button{
@@ -55,6 +57,8 @@
     background-color: transparent;
     align-items: center;
     color: #ccc;
+    cursor:pointer;
+    text-decoration: none;
 }
 
 .navbar-link{
@@ -67,6 +71,7 @@
     justify-content: center;
     padding: 12px;
     font-weight: 100;
+    cursor:pointer;
 }
 
 .navbar-link-home{

@@ -6,7 +6,8 @@ module.exports = {
       {
         userId: 1,
         url: 'https://soundclout.s3.amazonaws.com/Daylight.mp3',
-        title: 'Daylight - Watchhouse',
+        title: 'Daylight',
+        artist: 'Watchhouse',
         awsTitle: 'Daylight.mp3',
         description: 'Man this song is so chill',
         caption: '',
@@ -17,7 +18,8 @@ module.exports = {
       },
       {
         userId: 1,
-        title: 'Diamonds & Gasoline - Turnpike Trabadours',
+        title: 'Diamonds & Gasoline',
+        artist: 'Turnpike Trabadours',
         url: 'https://soundclout.s3.amazonaws.com/Diamonds+%26+Gasoline.mp3',
         awsTitle: 'Diamonds+%26+Gasoline.mp3',
         description: 'Country throwback',
@@ -29,7 +31,8 @@ module.exports = {
       },
       {
         userId: 1,
-        title: 'Rose Pink Cadillac - Dope Lemon',
+        title: 'Rose Pink Cadillac',
+        artist: 'Dope Lemon',
         url: 'https://soundclout.s3.amazonaws.com/DOPE+LEMON+-+ROSE+PINK+CADILLAC.mp3',
         awsTitle: 'DOPE+LEMON+-+ROSE+PINK+CADILLAC.mp3',
         description: 'Dope Lemons hit new song!',
@@ -41,7 +44,8 @@ module.exports = {
       },
       {
         userId: 2,
-        title: 'Sure Thing - Lil Wayne',
+        title: 'Sure Thing',
+        artist: 'Lil Wayne',
         url: 'https://soundclout.s3.amazonaws.com/Lil+Wayne+-+Sure+Thing+(Sorry+4+The+Wait).mp3',
         awsTitle: 'Lil+Wayne+-+Sure+Thing+(Sorry+4+The+Wait).mp3',
         description: 'My Favorite Lil Wayne song',
@@ -53,7 +57,8 @@ module.exports = {
       },
       {
         userId: 2,
-        title: 'Flex - Piff Marti',
+        title: 'Flex',
+        artist: 'Piff Marti',
         url: 'https://soundclout.s3.amazonaws.com/Piff+Marti+%26+7ak+-+FLEX.mp3',
         awsTitle: 'Piff+Marti+%26+7ak+-+FLEX.mp3',
         description: 'Favorite Piff Marti song ever',
@@ -65,7 +70,8 @@ module.exports = {
       },
       {
         userId: 2,
-        title: 'Whoa - Piff Marti',
+        title: 'Whoa',
+        artist: 'Piff Marti',
         url: 'https://soundclout.s3.amazonaws.com/Piff+Marti+%26+Lou+Villa+-+WHOA.mp3',
         awsTitle: 'Piff+Marti+%26+Lou+Villa+-+WHOA.mp3',
         description: 'Another great Piff banger',
@@ -77,7 +83,8 @@ module.exports = {
       },
       {
         userId: 2,
-        title: 'New Crib - Piff Marti',
+        title: 'New Crib',
+        artist: 'Piff Marti',
         url: 'https://soundclout.s3.amazonaws.com/Piff+Marti+%26+Viper+Beats+-+NEW+CRIB..mp3',
         awsTitle: 'Piff+Marti+%26+Viper+Beats+-+NEW+CRIB..mp3',
         description: 'Piff Martis newest hit',
@@ -89,7 +96,8 @@ module.exports = {
       },
       {
         userId: 1,
-        title: 'The Wolves - Watchhouse',
+        title: 'The Wolves',
+        artist: 'Watchhouse',
         url: 'https://soundclout.s3.amazonaws.com/The+Wolves.mp3',
         awsTitle: 'The+Wolves.mp3',
         description: 'A classic from Watchhouse',
@@ -102,6 +110,7 @@ module.exports = {
       {
         userId: 1,
         title: 'Fire - Waxahatchee',
+        artist: 'Waxahatchee',
         url: 'https://soundclout.s3.amazonaws.com/Waxahatchee-Fire.mp3',
         awsTitle: 'Waxahatchee-Fire.mp3',
         description: 'My favorite Waxahatchee song',
