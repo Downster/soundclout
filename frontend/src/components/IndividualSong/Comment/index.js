@@ -43,6 +43,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
             time
         }
         dispatch(createComment(newComment))
+        setComment('')
     }
 
     const remove = () => {

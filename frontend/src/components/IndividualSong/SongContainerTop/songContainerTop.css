@@ -19,7 +19,8 @@
 }
 
 .wavesurfer-marker div:nth-of-type(2) span{
-    opacity: 0;
+    opacity: 1;
+    z-index: 10;
 }
 .wavesurfer-marker div:nth-of-type(2){
     margin-bottom: 15px;
@@ -76,11 +77,22 @@
     
 }
 
-.total-time-show{
+.time-show-container{
+    display: flex;
+    justify-content: flex-end;
+}
+.absolute-time-container{
     position: absolute;
-    right: 35%;
-    top:30%;
-    z-index: 2000;
+    width: 840px;
+    top: 30%;
+}
+.total-time-show{
+    display: flex;
+    top: 30%;
+    z-index: 10;
+    width: fit-content;
+    justify-content: flex-end;
+    align-items: flex-end;
     font-size: 10px;
     background-color: #2a2827;
     color: #8c8c8c;
@@ -88,7 +100,7 @@
 
 .current-time-show{
     position: absolute;
-    z-index: 2000;
+    z-index: 10;
     font-size: 10px;
     background-color: #2a2827;
     top:30%;

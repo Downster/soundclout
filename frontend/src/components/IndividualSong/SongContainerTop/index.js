@@ -5,7 +5,7 @@ import WaveSurfer from 'wavesurfer.js';
 import MarkersPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.markers.min.js';
 import { formatTime } from "../../../utils/formatTime";
 import { Howl } from 'howler'
-import { removeSong, updateSongTime } from "../../../store/selectedSong";
+import { updateSongTime } from "../../../store/selectedSong";
 import { pauseSong, receivePlaySong, resumeSong, clearSong, setDuration } from "../../../store/songPlay";
 import './songContainerTop.css'
 
@@ -18,7 +18,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
     const [isPlaying, setIsPlaying] = useState(false)
     const waveformRef = useRef();
     const timeInterval = useRef()
-    const waveSurfer = useRef();
+    const waveSurfer = useRef(null);
     const markersRef = useRef();
 
     // console.log(currentSong.song.seek())
@@ -75,6 +75,11 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         waveSurfer.current.load(song.url)
         waveSurfer.current.on('ready', function () {
             setSongDuration(waveSurfer.current.getDuration())
+            timeInterval.current = setInterval(() => {
+                setCurrentTime(waveSurfer.current?.getCurrentTime());
+                console.log('working')
+            }, 300);
+
             if (currentSong.songId === song.id && currentSong.isPlaying) {
                 waveSurfer.current.skip(currentSong.song.seek())
                 waveSurfer.current.playPause()
@@ -92,12 +97,14 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             waveSurfer.current.stop()
             waveSurfer.current.destroy()
             waveSurfer.current = null
-            dispatch(removeSong())
             setIsPlaying(false)
         }
     }, [comments, currentSong.isPlaying, currentSong.song, currentSong.songId, dispatch, song.id, song.url])
     useEffect(() => {
         dispatch(updateSongTime((currentTime) ? currentTime.toFixed(2) : undefined))
+
+        return () => {
+        }
     }, [dispatch, currentTime])
 
 
@@ -115,16 +122,11 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
                     dispatch(setDuration(sound._duration))
                 }
             });
-            console.log(song)
             dispatch(receivePlaySong(sound, song.id))
         }
         setIsPlaying(!isPlaying)
         if (waveSurfer.current.isPlaying()) {
             clearInterval(timeInterval.current);
-        } else {
-            timeInterval.current = setInterval(() => {
-                setCurrentTime(waveSurfer.current.getCurrentTime());
-            }, 300);
         }
         waveSurfer.current.playPause()
         waveSurfer.current.setVolume(0)
@@ -158,7 +160,12 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
                         <div className="wavebar-div">
                             <div id='wavesurfer' ref={waveformRef}>
                             </div>
-                            <div className="total-time-show">{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
+                            <div className="absolute-time-container">
+
+                                <div className="time-show-container">
+                                    <div className="total-time-show">{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
+                                </div>
+                            </div>
                             <div className="current-time-show">{(currentTime) ? formatTime(currentTime) : ''}</div>
 
                         </div>
