@@ -46,21 +46,24 @@ function App() {
         <Switch>
           <Route exact path='/'>
             {(sessionUser) ? <Redirect to='/discover' /> : <SplashPage isLoaded={isLoaded} hasSong={hasSong} setSignIn={setSignIn} setSignUp={setSignUp} />}
+            <SongPlayer />
           </Route>
           <Route path='/upload'>
             <Navigation isLoaded={isLoaded} />
             {(sessionUser) ?
               <EditOrUploadSong sessionUser={sessionUser} options={'upload'} /> : <h1>Please login</h1>
             }
+            <SongPlayer />
           </Route>
           <Route path='/songs/:songId'>
             <Navigation isLoaded={isLoaded} />
             <IndividualSong sessionUser={sessionUser} setShowEdit={setShowEdit} showEdit={showEdit} />
+            <SongPlayer />
           </Route>
           <Route path='/discover'>
             <Navigation isLoaded={isLoaded} />
             <ShowSongs />
-            <SongPlayer hasSong={hasSong} />
+            <SongPlayer />
           </Route>
           <Route path='/about'>
             <Navigation isLoaded={isLoaded} />

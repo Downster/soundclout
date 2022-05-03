@@ -11,9 +11,14 @@ const SongPlayer = () => {
     const intervalRef = useRef(null)
     const dispatch = useDispatch()
 
-
+    //check to see if the song has ended so the interval can be cleared and reset
+    if (Math.floor(position) === Math.floor(currentSong.duration)) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null
+    }
     const updateWidth = () => {
-        setPosition((currentSong.song.seek() / currentSong.song.duration()) * 100);
+        setPosition((currentSong.song.seek()));
+
     }
 
 
@@ -21,7 +26,6 @@ const SongPlayer = () => {
         clearInterval(intervalRef.current);
         intervalRef.current = null
     }
-
 
     if (!intervalRef.current && currentSong.isPlaying) {
         intervalRef.current = setInterval(() => {

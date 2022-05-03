@@ -43,6 +43,7 @@
     margin-right: 8px;
 }
 
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
       overflow: hidden;
@@ -63,21 +64,21 @@
       width: 10px;
       -webkit-appearance: none;
       height: 10px;
-      cursor:grab;
+      cursor:pointer;
       background: #f50;
-      box-shadow: -500px 0 0 500px  #f50;
+      box-shadow: -270px 0 0 270px  #f50;
     }
 
 }
 /** FF*/
-input[type="range"]::-moz-range-progress {
+ input[type="range"]::-moz-range-progress {
   background-color:  #f50;
 }
 input[type="range"]::-moz-range-track {  
   background-color: #9a905d;
 }
 /* IE*/
-input[type="range"]::-ms-fill-lower {
+ input[type="range"]::-ms-fill-lower {
   background-color:  #f50;
 }
 input[type="range"]::-ms-fill-upper {  

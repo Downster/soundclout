@@ -10,6 +10,7 @@ import './songContainerTop.css'
 
 const SongContainerTop = ({ sessionUser, song, comments }) => {
     const dispatch = useDispatch()
+    const currentSong = useSelector(state => state.currentSong)
     const [songDuration, setSongDuration] = useState();
     const [currentTime, setCurrentTime] = useState();
     const [isPlaying, setIsPlaying] = useState(false)
@@ -18,6 +19,8 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
     const timeInterval = useRef()
     const waveSurfer = useRef();
     const markersRef = useRef();
+
+    // console.log(currentSong.song.seek())
     //setup markers array to push marker objects to
 
 
@@ -71,7 +74,14 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         waveSurfer.current.load(song.url)
         waveSurfer.current.on('ready', function () {
             setSongDuration(waveSurfer.current.getDuration())
+            if (currentSong.songId === song.id) {
+                waveSurfer.current.skip(currentSong.song.seek())
+                waveSurfer.current.playPause()
+                waveSurfer.current.setVolume(0)
+                setIsPlaying(true)
+            }
         })
+
 
         return () => {
             clearInterval(timeInterval.current);
@@ -101,6 +111,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             }, 300);
         }
         waveSurfer.current.playPause()
+        waveSurfer.current.setVolume(0)
     }
 
 
