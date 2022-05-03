@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import { useDispatch } from 'react-redux'
+import DynamicSearch from '../DynamicSearch';
 function Navigation({ setSignIn, setSignUp }) {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch()
@@ -30,7 +31,7 @@ function Navigation({ setSignIn, setSignUp }) {
         );
     } else {
         search = (
-            <input className='search-bar unauth' placeholder='Search for artists, bands, tracks, and podcasts'></input>
+            <DynamicSearch className='search-bar unauth' placeholder='Search for artists, bands, tracks, and podcasts' />
         )
         sessionLogo = (
             <>
