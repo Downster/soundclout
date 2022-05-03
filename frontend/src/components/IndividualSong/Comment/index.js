@@ -21,10 +21,10 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const likes = useSelector(state => state.likes[songId])
 
     useEffect(() => {
-        if (likes && likes[sessionUser.id]) {
+        if (sessionUser && likes && likes[sessionUser.id]) {
             setIsLiked(true)
         }
-        if (sessionUser.id === song.userId) {
+        if (sessionUser && sessionUser.id === song.userId) {
             setCanEdit(true)
         }
     }, [])
@@ -71,7 +71,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
 
     return (
         <>
-            <div className="comment-container">
+            {sessionUser && <div className="comment-container">
                 <div className="comment-form">
 
                     <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
@@ -102,7 +102,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                         Delete
                     </button>
                 </div>
-            </div>
+            </div>}
         </>
     )
 }
