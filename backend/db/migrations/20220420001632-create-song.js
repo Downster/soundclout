@@ -16,6 +16,10 @@ module.exports = {
         references: { model: 'Users' },
         type: Sequelize.INTEGER
       },
+      artist: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       url: {
         allowNull: false,
         type: Sequelize.STRING

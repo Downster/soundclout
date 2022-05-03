@@ -77,9 +77,9 @@ export const createSong = (song) => async (dispatch) => {
     if (res.ok) {
         const song = await res.json()
         dispatch(receiveSong(song))
-        return song
     } else {
-        //error handling here
+        const errors = await res.json()
+        return errors
     }
 
 }

@@ -41,7 +41,7 @@ function Navigation({ setSignIn, setSignUp }) {
             <>
                 <button className='navbar-signin-button' to="/login" onClick={() => setSignIn(true)}>Sign In</button>
                 <button className='navbar-create-button' to="/signup" onClick={() => setSignUp(true)}>Create Account</button>
-                <button className='navbar-upload-button' to='/upload'>Upload</button>
+                <NavLink className='navbar-upload-button' to='/upload'>Upload</NavLink>
             </>
         );
     }

@@ -1,0 +1,18 @@
+.song-image{
+    width: 179px;
+    height: 179px;
+}
+
+.play-song-button{
+    position: absolute;
+    border-radius: 55px;
+}
+
+.pause-song-button{
+    position: absolute;
+    border-radius: 55px;
+}
+
+.hidden{
+    visibility: hidden;
+}
