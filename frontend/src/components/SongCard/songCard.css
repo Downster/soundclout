@@ -1,6 +1,7 @@
 .song-image{
     width: 179px;
     height: 179px;
+    flex: none;
 }
 
 .play-song-button{

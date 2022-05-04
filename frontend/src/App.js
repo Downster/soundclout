@@ -19,6 +19,7 @@ import { getAllGenres } from "./store/genres";
 
 
 function App() {
+  const isPlaying = useSelector(state => state.currentSong.isPlaying)
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasSong, setHasSong] = useState(false)
@@ -26,6 +27,12 @@ function App() {
   const [showSignIn, setSignIn] = useState(false)
   const [showSignUp, setSignUp] = useState(false)
   const sessionUser = useSelector(state => state.session.user);
+
+  useEffect(() => {
+    if (isPlaying) {
+      setHasSong(true)
+    }
+  }, [isPlaying])
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllLikes())
@@ -62,9 +69,16 @@ function App() {
         <Route path='/discover'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
           <div className="discover-songs">
-            <ShowSongs />
+            <h1>Trending Hip-hop & Rap songs</h1>
+            <ShowSongs genreFilter={14} />
+            <h1>Trending Folk & Singer-Songwriter songs</h1>
+            <ShowSongs genreFilter={13} />
+            <h1>Trending country songs</h1>
+            <ShowSongs genreFilter={'all'} />
+            <h1>Most liked songs</h1>
+            <ShowSongs genreFilter={4} />
           </div>
-          <SongPlayer />
+          <SongPlayer hasSong={hasSong} />
         </Route>
         <Route path='/about'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />

@@ -34,33 +34,42 @@ router.delete('/:songId', requireAuth, asyncHandler(async (req, res) => {
 
 }))
 
-router.patch('/:songId', requireAuth, upload.fields([
-    { name: 'image', maxCount: 1 },
-]), asyncHandler(async (req, res) => {
-    const { title, description, caption, private } = req.body
-    if (!title) {
-        res.status = 400;
-        res.json({
-            'Title': 'Bad Request',
-            'Errors': 'Please input a title'
-        })
-    }
+router.patch('/:songId', requireAuth, asyncHandler(async (req, res, next) => {
+    const { title, artist, description, caption, imageUrl, private, genre } = req.body
     const { songId } = req.params
-    const song = await db.Song.findByPk(songId, {
-        include: [
-            { model: db.User },
-            { model: db.Album },
-            { model: db.Genre }
-        ]
-    });
-    await song.update({
-        title,
-        description,
-        caption,
-        private: (private === 'public') ? false : true
+    if (!title || !artist) {
+        const errors = []
+        const error = new Error('Invalid input')
+        if (!artist) {
+            errors.push('Please provide an artist')
+        }
+        if (!title) {
+            errors.push('Please provide a title')
+        }
+        error.title = "Invalid input";
+        error.errors = errors
+        error.status = 400;
+        next(error)
+    } else {
+        const song = await db.Song.findByPk(songId);
+        await song.update({
+            title,
+            imageUrl,
+            artist,
+            genre,
+            description,
+            caption,
+            private: (private === 'public') ? false : true
 
-    })
-    res.json(song)
+        })
+        const updatedSong = await db.Song.findByPk(songId, {
+            include: [
+                { model: db.User },
+                { model: db.Genre }
+            ]
+        });
+        res.json(updatedSong)
+    }
 }))
 
 

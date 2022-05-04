@@ -1,0 +1,18 @@
+.searchMenu{
+    width: 392px;
+    position: absolute;
+    height: fit-content;
+    background-color: #111111
+}
+
+.search-link{
+    color: #999999
+}
+
+.inactive{
+    visibility: hidden;
+}
+
+.active{
+    visibility: visible;
+}

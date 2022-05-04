@@ -50,7 +50,6 @@ const UploadSongForm = ({ sessionUser }) => {
         formData.append('private', privacy)
         const error = await dispatch(createSong(formData))
         if (error) {
-            console.log(error.errors)
             setErrors(error.errors)
         } else {
             history.push('/discover')

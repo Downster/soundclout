@@ -2,6 +2,9 @@
     margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    overflow-x: auto;
     gap: 20px;
-    width: 1240px;
+    width: 1000px;
+    height: 200px;
 }

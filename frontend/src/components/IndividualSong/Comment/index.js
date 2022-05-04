@@ -98,10 +98,10 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                             Edit
                         </button>
                     }
-                    <button onClick={remove}>
+                    {canEdit && <button onClick={remove}>
                         <i class="fa-solid fa-trash"></i>
                         Delete
-                    </button>
+                    </button>}
                 </div>
             </div>}
         </>

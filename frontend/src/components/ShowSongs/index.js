@@ -3,11 +3,13 @@ import { useEffect, } from "react"
 import { getSongs } from "../../store/songs"
 import SongCard from '../SongCard'
 import './ShowSongs.css'
+import { generatePath } from "react-router-dom"
 
 
-const ShowSongs = () => {
+const ShowSongs = ({ genreFilter }) => {
     const dispatch = useDispatch()
     const songs = useSelector(state => state.songs)
+
 
 
 
@@ -23,9 +25,17 @@ const ShowSongs = () => {
         <>
             <div className="songs">
                 {Object.values(songs).map((song) => {
-                    return (
-                        <SongCard song={song} />
-                    )
+                    if (genreFilter !== 'all' && song.genreId === genreFilter) {
+                        return (
+                            <SongCard song={song} />
+                        )
+                    } else if (genreFilter === 'all') {
+                        return (
+                            <SongCard song={song} />
+                        )
+                    } else {
+                        return null
+                    }
                 })}
             </div>
         </>

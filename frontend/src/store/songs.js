@@ -57,15 +57,19 @@ export const deleteSong = (songId) => async (dispatch) => {
 export const edit = (id, song) => async (dispatch) => {
     const res = await csrfFetch(`/api/songs/${id}`, {
         method: 'PATCH',
-        body: song
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(song)
     })
 
     if (res.ok) {
         const song = await res.json()
-        console.log(song)
         dispatch(editSong(song))
+    } else {
+        const errors = await res.json()
+        return errors
     }
-
 }
 
 export const createSong = (song) => async (dispatch) => {

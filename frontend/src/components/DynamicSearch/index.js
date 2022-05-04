@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDetectOutsideClick } from "../DetectClick"
 import SearchContainer from "../SearchContainer"
 import { csrfFetch } from "../../store/csrf";
+import './dynamicSearch.css'
 
 const DynamicSearch = ({ className, placeHolder }) => {
     const dropdownRef = useRef(null);
     const [myOptions, setMyOptions] = useState({
-        items: new Set(),
+        users: new Set(),
+        songs: new Set(),
         searchTerm: "",
     });
     const [value, setValue] = useState("");
@@ -20,15 +22,15 @@ const DynamicSearch = ({ className, placeHolder }) => {
                 }
             })
             .then((data) => {
-                console.log(data)
                 if (!myOptions.items.length) {
                     for (let i = 0; i < data.users.length; i++) {
-                        myOptions.items.add(data.users[i].username);
+                        myOptions.users.add(JSON.stringify(data.users[i]));
                     }
                     for (let i = 0; i < data.songs.length; i++) {
-                        myOptions.items.add(data.songs[i].title);
+                        myOptions.songs.add(JSON.stringify(data.songs[i]));
                     }
                     setMyOptions(myOptions);
+
                 } else {
                     getDataFromAPI();
                 }
@@ -44,10 +46,10 @@ const DynamicSearch = ({ className, placeHolder }) => {
             })
             .then((data) => {
                 for (let i = 0; i < data.users.length; i++) {
-                    myOptions.items.add(data.users[i].username);
+                    myOptions.users.add(JSON.stringify(data.users[i]));
                 }
                 for (let i = 0; i < data.songs.length; i++) {
-                    myOptions.items.add(data.songs[i].title);
+                    myOptions.songs.add(JSON.stringify(data.songs[i]));
                 }
                 setMyOptions(myOptions);
             });
@@ -60,13 +62,28 @@ const DynamicSearch = ({ className, placeHolder }) => {
     };
 
     const dynamicSearch = () => {
-        if (myOptions.items !== undefined) {
-            const itemsArray = [...myOptions.items]
-            const filtered = itemsArray.filter((item) =>
-                item.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+        if (myOptions.users !== undefined && myOptions.songs !== undefined) {
+            const usersArray = []
+            const songsArray = []
+            myOptions.users.forEach((user) => {
+                const parsedUser = JSON.parse(user)
+                usersArray.push(parsedUser)
+            })
+
+            myOptions.songs.forEach((song) => {
+                const parsedSong = JSON.parse(song)
+                songsArray.push(parsedSong)
+            })
+            const filteredUsers = usersArray.filter((user) => {
+                return user.username.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+            }
             );
-            console.log(filtered)
-            return filtered
+            const filteredSongs = songsArray.filter((song) => {
+                return song.title.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+            }
+            );
+            return (filteredUsers.concat(filteredSongs))
+
         } else {
             return [];
         }

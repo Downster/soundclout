@@ -47,6 +47,11 @@
     display: flex;
     gap: 5px;
 }
+
+.song-info-container{
+    display: flex;
+    justify-content: space-between;
+}
 .artist-song-info{
     display: flex;
     flex-direction: column;
