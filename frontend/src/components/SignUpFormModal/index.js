@@ -21,6 +21,8 @@ function SignupFormModal({ setSignUp }) {
             setErrors([]);
             const result = await dispatch(sessionActions.signup({ email, username, password }))
             setErrors(result.errors)
+        } else {
+            setErrors(["Passwords don't match"])
         }
     };
     const closeModal = () => {
