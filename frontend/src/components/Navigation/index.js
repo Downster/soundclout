@@ -23,7 +23,7 @@ function Navigation({ setSignIn, setSignUp }) {
         )
         sessionLinks = (
             <>
-                <NavLink className='navbar-link' to='/try-pro'>Try Pro</NavLink>
+                <NavLink className='navbar-link' to='/about'>About</NavLink>
                 <NavLink className='navbar-link' to='/upload'>Upload</NavLink>
                 <ProfileButton user={sessionUser} />
                 <i className="fa-solid fa-ellipsis"></i>
@@ -51,7 +51,7 @@ function Navigation({ setSignIn, setSignUp }) {
         <div className='nav-bar'>
             {sessionLogo}
             <NavLink className='navbar-link-home' exact to="/">Home</NavLink>
-            <NavLink className='navbar-link-about' to='/about'>About</NavLink>
+            <NavLink className='navbar-link-about' to='/stream'>Stream</NavLink>
             <NavLink className='navbar-link-discover' to='/library'>Library</NavLink>
             <div className='header-search'>
                 <div className='header-search-form'>
