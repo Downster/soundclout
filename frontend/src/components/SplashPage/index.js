@@ -1,4 +1,4 @@
-
+import DeveloperComponent from '../DeveloperComponent'
 import Navigation from '../Navigation'
 import SongPlayer from '../SongPlayer'
 import ShowSongs from '../ShowSongs'
@@ -26,6 +26,7 @@ const SplashPage = ({ isLoaded, hasSong, setSignIn, setSignUp }) => {
                         <ShowSongs genreFilter={'like'} />
                     </div>
                 </div>
+                <DeveloperComponent />
             </div>
             <SongPlayer hasSong={hasSong} />
         </>
