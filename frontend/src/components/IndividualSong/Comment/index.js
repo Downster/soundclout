@@ -19,6 +19,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const selectedSong = useSelector(state => state.songs[songId])
     const time = useSelector(state => state.selectedSong.time)
     const likes = useSelector(state => state.likes[songId])
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         if (sessionUser && likes && likes[sessionUser.id]) {
@@ -33,8 +34,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
         dispatch(addSelectedSong(selectedSong))
     }, [dispatch])
 
-    const submitComment = (e) => {
-        console.log(time)
+    const submitComment = async (e) => {
         e.preventDefault()
         const newComment = {
             userId: sessionUser.id,
@@ -42,8 +42,13 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
             body: comment,
             time
         }
-        dispatch(createComment(newComment))
-        setComment('')
+        const err = await dispatch(createComment(newComment))
+        if (err) {
+            setErrors(err.errors)
+        } else {
+            setComment('')
+            setErrors([])
+        }
     }
 
     const remove = () => {
@@ -82,7 +87,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                             type='text'
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
-                            placeholder='Write a comment'
+                            placeholder={(errors.length) ? errors[1] : 'Write a comment'}
                         >
                         </input>
                     </form>

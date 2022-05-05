@@ -79,7 +79,6 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             setSongDuration(waveSurfer.current.getDuration())
             timeInterval.current = setInterval(() => {
                 setCurrentTime(waveSurfer.current?.getCurrentTime());
-                console.log('working')
             }, 300);
 
             if (currentSong.songId === song.id && currentSong.isPlaying) {
