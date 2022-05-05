@@ -39,6 +39,9 @@ const SongCard = ({ song, all }) => {
 
     return (
         <div key={song.id} className={(showPlay) ? `song-container blur` : 'song-container'} >
+            <img className={(showPause) ? `pause-song-button` : `pause-song-button hidden`}
+                src={require('./images/pause-button.png')}
+                onClick={() => pause()} />
             <p className={'song-text'}>{song.title}</p>
             <p className={'song-text'}>{song.artist}</p>
             <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
@@ -48,9 +51,6 @@ const SongCard = ({ song, all }) => {
                 onMouseOver={() => setShowPlay(true)}
                 src={require('./images/play-button.png')}
                 onClick={() => playSong(song)} />
-            <img className={(showPause) ? `pause-song-button` : `pause-song-button hidden`}
-                src={require('./images/pause-button.png')}
-                onClick={() => pause()} />
 
         </div >
     )

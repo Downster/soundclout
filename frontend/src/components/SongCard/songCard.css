@@ -14,10 +14,10 @@
 }
 
 .pause-song-button{
-    transform: translateY(-120px) ;
+    transform: translateY(155px) ;
     border-radius: 55px;
 }
 
 .hidden{
-    display: none;
+    visibility: hidden;
 }
