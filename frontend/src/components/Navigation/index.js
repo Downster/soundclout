@@ -21,6 +21,7 @@ function Navigation({ setSignIn, setSignUp }) {
                 <img src={require('./images/soundcloud.png')} />
             </>
         )
+
         sessionLinks = (
             <>
                 <NavLink className='navbar-link' to='/about'>About</NavLink>

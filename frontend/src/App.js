@@ -17,6 +17,7 @@ import SignupFormModal from "./components/SignUpFormModal";
 import { getAllLikes } from './store/likes'
 import { getAllGenres } from "./store/genres";
 import { getUserLikes } from "./store/userLikes";
+import LibraryContainer from "./components/LibraryContainer";
 
 
 function App() {
@@ -104,13 +105,10 @@ function App() {
         </Route>
         <Route path='/library'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
-          <div className="outside-container">
-            <div className="discover-songs-container">
-              <div className="stream-songs">
-                <ShowSongs genreFilter={'userLikes'} sessionUser={sessionUser} />
-              </div>
-            </div>
-          </div>
+          {(sessionUser) ? <LibraryContainer setSignIn={setSignIn} setSignUp={setSignUp} sessionUser={sessionUser} /> : <LoginFormModal setSignIn={setSignIn} uploadDenied={true} />}
+        </Route>
+        <Route path=''>
+          <h2>Page Not found</h2>
         </Route>
       </Switch>
 

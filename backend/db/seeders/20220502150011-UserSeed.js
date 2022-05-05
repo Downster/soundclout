@@ -46,6 +46,14 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          username: 'Demo Dan',
+          imageUrl: 'https://imgur.com/hdrdJxY.jpg',
+          email: 'demo@user.io',
+          hashedPassword: password,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ])
 
 
