@@ -1,6 +1,6 @@
 # SoundClout
 
-SoundClout is a pixel perfect Soundcloud clone that integrates AWS S3, Howler.js, and wavesurfer.js to give users that signature Soundcloud feel.[Soundcloud](https://www.soundcloud.com/).
+SoundClout is a pixel perfect Soundcloud clone that integrates AWS S3, Howler.js, and wavesurfer.js to give users that signature [Soundcloud](https://www.soundcloud.com/) feel.
 
 View and test out SoundClout on [Heroku](https://soundclout-app.herokuapp.com/)
 
