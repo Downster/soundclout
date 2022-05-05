@@ -28,7 +28,15 @@ function LoginFormModal({ setSignIn, uploadDenied }) {
             history.push('/')
         }
         setSignIn(false)
+    }
 
+    const demoLogin = async (e) => {
+        const user = {
+            credential: 'demo@user.io',
+            password: 'Password123!'
+        }
+        const result = await dispatch(sessionActions.login(user))
+        setSignIn(false)
     }
 
     return (
@@ -38,13 +46,12 @@ function LoginFormModal({ setSignIn, uploadDenied }) {
             <div className='modal-container-sign-in'>
                 <form onSubmit={handleSubmit} className='sign-in-form'>
                     <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
                     <input className='sign-in-input'
                         type="text"
                         value={credential}
                         onChange={(e) => setCredential(e.target.value)}
-                        required
                         placeholder='Email'
                     />
 
@@ -53,10 +60,10 @@ function LoginFormModal({ setSignIn, uploadDenied }) {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required
                         placeholder='Password'
                     />
                     <button className='log-in-button' type="submit">Log In</button>
+                    <button className='log-in-button' onClick={(e) => demoLogin(e)}>Demo User</button>
                 </form>
             </div>
         </div >

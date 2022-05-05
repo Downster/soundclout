@@ -16,6 +16,8 @@ import SplashPage from "./components/SplashPage";
 import SignupFormModal from "./components/SignUpFormModal";
 import { getAllLikes } from './store/likes'
 import { getAllGenres } from "./store/genres";
+import { getUserLikes } from "./store/userLikes";
+import LibraryContainer from "./components/LibraryContainer";
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
   const [showSignIn, setSignIn] = useState(false)
   const [showSignUp, setSignUp] = useState(false)
   const sessionUser = useSelector(state => state.session.user);
+  const userId = sessionUser?.id
 
   useEffect(() => {
     if (isPlaying) {
@@ -39,6 +42,12 @@ function App() {
     dispatch(getAllLikes())
     dispatch(getAllGenres())
   }, [dispatch]);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(getUserLikes(userId))
+    }
+  }, [dispatch, sessionUser])
 
 
 
@@ -82,6 +91,24 @@ function App() {
         </Route>
         <Route path='/about'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+        </Route>
+        <Route path='/stream'>
+          <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+          <div className="outside-container">
+            <div className="discover-songs-container">
+              <div className="stream-songs">
+                <ShowSongs genreFilter={'all'} />
+              </div>
+            </div>
+          </div>
+          <SongPlayer hasSong={hasSong} />
+        </Route>
+        <Route path='/library'>
+          <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+          {(sessionUser) ? <LibraryContainer setSignIn={setSignIn} setSignUp={setSignUp} sessionUser={sessionUser} /> : <LoginFormModal setSignIn={setSignIn} uploadDenied={true} />}
+        </Route>
+        <Route path=''>
+          <h2>Page Not found</h2>
         </Route>
       </Switch>
 

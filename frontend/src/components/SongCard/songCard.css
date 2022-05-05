@@ -4,16 +4,20 @@
     flex: none;
 }
 
+.song-text{
+    width: 179px;
+}
+
 .play-song-button{
-    position: absolute;
+    transform: translateY(-120px) ;
     border-radius: 95px;
 }
 
 .pause-song-button{
-    position: absolute;
+    transform: translateY(-120px) ;
     border-radius: 55px;
 }
 
 .hidden{
-    visibility: hidden;
+    display: none;
 }
