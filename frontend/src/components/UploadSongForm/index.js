@@ -101,7 +101,7 @@ const UploadSongForm = ({ sessionUser }) => {
 
 
     return (
-        <div className="outside-container">
+        <div className="outside-container-upload">
             {!isUploaded &&
                 <div className="upload-first-song">
                     <div className="upload-song-container">
