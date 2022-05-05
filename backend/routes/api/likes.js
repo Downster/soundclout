@@ -28,6 +28,16 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     res.json(like)
 }))
 
+router.get('/:userId', asyncHandler(async (req, res) => {
+    const { userId } = req.params
+    const likes = await db.Likes.findAll({
+        where: {
+            userId
+        }
+    })
+    res.json(likes)
+}))
+
 
 
 module.exports = router

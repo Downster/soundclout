@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import './songCard.css'
 
 
-const SongCard = ({ song }) => {
+const SongCard = ({ song, all }) => {
     const dispatch = useDispatch()
     const isPlaying = useSelector(state => state.currentSong.isPlaying)
     const isPaused = useSelector(state => state.currentSong.isPaused)
@@ -38,7 +38,9 @@ const SongCard = ({ song }) => {
 
 
     return (
-        <div key={song.id} className={`song-container`} >
+        <div key={song.id} className={(showPlay) ? `song-container blur` : 'song-container'} >
+            <p className={'song-text'}>{song.title}</p>
+            <p className={'song-text'}>{song.artist}</p>
             <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
                 <img className={`song-image ${song.id}`} src={song.imageUrl} />
             </Link>
@@ -49,6 +51,7 @@ const SongCard = ({ song }) => {
             <img className={(showPause) ? `pause-song-button` : `pause-song-button hidden`}
                 src={require('./images/pause-button.png')}
                 onClick={() => pause()} />
+
         </div >
     )
 }
