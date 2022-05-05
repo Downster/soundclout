@@ -7,11 +7,10 @@ View and test out SoundClout on [Heroku](https://soundclout-app.herokuapp.com/)
 # Index
 
 |
-[MVP Feature List](https://github.com/Downster/doggy-done/wiki/Feature-List) |
-[Database Schema](https://github.com/Downster/doggy-done/wiki/Database-Schema) |
+[MVP Feature List](https://github.com/Downster/soundclout/wiki/Feature-List) |
+[Database Schema](https://github.com/Downster/soundclout/wiki/Db-Schema) |
 [API Documentation](https://github.com/Downster/doggy-done/wiki/API-Documentation) |
 [Frontend Routes](https://github.com/Downster/doggy-done/wiki/Frontend-Routes) |
-[User Stories](https://github.com/Downster/doggy-done/wiki/User-Stories) |
 
 # Technologies Used
 Soundclout is built on a React / Redux frontend, an Express backend, and uses a PostgreSQL database.
