@@ -27,7 +27,7 @@ function Navigation({ setSignIn, setSignUp }) {
                 <NavLink className='navbar-link' to='/about'>About</NavLink>
                 <NavLink className='navbar-link' to='/upload'>Upload</NavLink>
                 <ProfileButton user={sessionUser} />
-                <i className="fa-solid fa-ellipsis"></i>
+                {/* <i className="fa-solid fa-ellipsis"></i> */}
             </>
         );
     } else {

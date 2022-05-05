@@ -7,9 +7,28 @@
     justify-content: center;
 }
 
+.dropdown-div{
+    display: flex;
+    flex-direction: column;
+}
+.dropdown-name{
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.logout-button{
+    margin-top: 10px;
+    width: 100%;
+}
+
 .user-dropdown{
     position: absolute;
-
+    top:100%;
+    width: 120px;
+    background-color: #f2f2f2;
+    border: 1.5px solid #e5e5e5;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .navbar-signin-button{
@@ -180,6 +199,7 @@
     justify-content: space-between;
     float: left;
     padding: 12px 28px 12px 10px;
+    
 }
 
 .user-image{
