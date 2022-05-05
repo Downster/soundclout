@@ -144,16 +144,24 @@ const UploadSongForm = ({ sessionUser }) => {
                 <>
 
                     <div className="replace-upload">
-                        <h1>Provide FLAC, WAV, ALAC, or AIFF for highest audio quality. Learn more about lossless HD.</h1>
-                        <button onClick={showSongInput2}>Replace File</button>
+                        <div className="replace-upload-container">
+
+                            <h1 className="provide-file">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality. Learn more about lossless HD.</h1>
+                            <div className="replace-button">
+                                <button className="replace-file" onClick={showSongInput2}>Replace File</button>
+                            </div>
+                        </div>
                     </div>
                     <div className="file-upload show">
-                        <h1>{songName}</h1>
-                        <input className="song-upload"
-                            type='file'
-                            ref={hiddenSongInput2}
-                            onChange={(e) => updateFile(e, 'song')}
-                        />
+                        <div className="upload-title-container">
+
+                            <h1 className="upload-title-text">{songName}</h1>
+                            <input className="song-upload"
+                                type='file'
+                                ref={hiddenSongInput2}
+                                onChange={(e) => updateFile(e, 'song')}
+                            />
+                        </div>
                     </div>
                     <div className="progress-bar">
                         <progress value={progress} max='100'></progress>
@@ -161,8 +169,7 @@ const UploadSongForm = ({ sessionUser }) => {
                     <div className="upload-song-container second">
                         <div className='upload-song'>
                             <div className="upload-song-header">
-                                <h1>Basic Info</h1>
-
+                                <h1 className="basic-info">Basic Info</h1>
 
                             </div>
                             <div className="image-form-container">
@@ -180,14 +187,17 @@ const UploadSongForm = ({ sessionUser }) => {
                                             return <h1 key={idx}> {error}</h1>
                                         })}
                                     </div>
-                                    <label>Title*</label>
+                                    <label>Title *</label>
                                     <input
+                                        className="upload-input"
+                                        placeholder="Name your track"
                                         type='text'
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
                                     />
-                                    <label>Artist*</label>
+                                    <label>Artist *</label>
                                     <input
+                                        className="upload-input"
                                         type='text'
                                         value={artist}
                                         onChange={(e) => setArtist(e.target.value)}
@@ -195,6 +205,7 @@ const UploadSongForm = ({ sessionUser }) => {
 
                                     <label>Genre</label>
                                     <select
+                                        className="upload-input-genre"
                                         onChange={({ target: { value } }) => setGenre(value)}
                                         value={genre}
                                     >
@@ -209,37 +220,52 @@ const UploadSongForm = ({ sessionUser }) => {
                                     </select>
                                     <label>Description</label>
                                     <textarea
+                                        className="upload-input-description"
                                         value={description}
+                                        placeholder='Describe your track'
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
                                     <label>Caption</label>
                                     <textarea
+                                        className="upload-input-caption"
+                                        placeholder="Add a caption to your post (optional)"
                                         value={caption}
                                         onChange={(e) => setCaption(e.target.value)}
                                     />
                                     <label>Privacy:</label>
-                                    <label>
-
+                                    <div className="public-radio">
                                         <input
+                                            className="upload-input-radio"
+                                            id='public'
                                             type='radio'
                                             value='yes'
                                             name='privacy'
                                             checked={privacy === 'public'}
                                             onChange={() => setPrivacy('public')}
                                         />
-                                        Public
-                                    </label>
-                                    <label>
+                                        <label for="public">Public</label>
+                                    </div>
+                                    <div className="private-radio">
                                         <input
+                                            className="upload-input-radio"
                                             type='radio'
                                             value='no'
                                             name='privacy'
                                             checked={privacy === 'private'}
                                             onChange={() => setPrivacy('private')}
                                         />
-                                        Private
-                                    </label>
-                                    <button className='submit-song' onClick={(e) => handleSubmit(e)}>Upload Song</button>
+                                        <label for="private">Private</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bottom-buttons-upload">
+                                <div className="button-container-upload">
+                                    <div className="required-text">
+                                        <p className="asterisk">*</p>
+                                        <p className="texty">Required fields</p>
+                                    </div>
+
+                                    <button className='submit-song-button' onClick={(e) => handleSubmit(e)}>Save</button>
                                 </div>
                             </div>
                         </div>
