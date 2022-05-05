@@ -51,8 +51,8 @@ function Navigation({ setSignIn, setSignUp }) {
     return (
         <div className='nav-bar'>
             {sessionLogo}
-            <NavLink className='navbar-link-home' exact to="/">Home</NavLink>
-            <NavLink className='navbar-link-about' to='/stream'>Stream</NavLink>
+            <NavLink className='navbar-link-home' exact to={"/discover"}>Discover</NavLink>
+            <NavLink className='navbar-link-about' to='/stream'>All</NavLink>
             <NavLink className='navbar-link-discover' to='/library'>Library</NavLink>
             <div className='header-search'>
                 <div className='header-search-form'>

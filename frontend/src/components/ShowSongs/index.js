@@ -57,7 +57,7 @@ const ShowSongs = ({ genreFilter, sessionUser }) => {
         <>
             <div className='songs-container'>
                 {(currentGenre) ? <h1 className="container-title">Trending {currentGenre} songs </h1> : null}
-                <div className={(genreFilter === 'like') ? 'songs-liked' : (genreFilter === 'all') ? 'songs-all' : 'songs'}>
+                <div className={(genreFilter === 'like') ? 'songs-liked' : (genreFilter === 'all' || genreFilter === 'userLikes') ? 'songs-all' : 'songs'}>
 
                     {Object.values(songs).map((song) => {
                         if (genreFilter !== 'all' && song.genreId === genreFilter) {

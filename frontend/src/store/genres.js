@@ -22,7 +22,6 @@ const genresReducer = (state = initialState, action) => {
     const nextState = { ...state }
     switch (action.type) {
         case GET_GENRES:
-            console.log(action)
             action.genres.forEach(genre => {
                 nextState[genre.id] = genre
             });

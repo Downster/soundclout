@@ -158,7 +158,7 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
                             />
                             Private
                         </label>
-                        <button className='submit-song' onClick={(e) => handleSubmit(e)}>Upload Song</button>
+                        <button className='submit-song' onClick={(e) => handleSubmit(e)}>Edit Song</button>
                     </div>
                 </div>
             </div>

@@ -75,7 +75,6 @@ const UploadSongForm = ({ sessionUser }) => {
 
     const updateFile = async (e, type) => {
         const file = e.target.files[0];
-        console.log(e.target.files)
         if (!isUploaded) {
             setIsUploaded(!isUploaded)
         }
@@ -90,7 +89,7 @@ const UploadSongForm = ({ sessionUser }) => {
         if (type === 'image') {
             uploadImage(fileName, file)
             setTimeout(() => {
-                setImage(`http://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+                setImage(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
             }, 3000)
         }
     };
@@ -243,7 +242,7 @@ const UploadSongForm = ({ sessionUser }) => {
                                             checked={privacy === 'public'}
                                             onChange={() => setPrivacy('public')}
                                         />
-                                        <label for="public">Public</label>
+                                        <label>Public</label>
                                     </div>
                                     <div className="private-radio">
                                         <input
@@ -254,7 +253,7 @@ const UploadSongForm = ({ sessionUser }) => {
                                             checked={privacy === 'private'}
                                             onChange={() => setPrivacy('private')}
                                         />
-                                        <label for="private">Private</label>
+                                        <label>Private</label>
                                     </div>
                                 </div>
                             </div>

@@ -43,9 +43,6 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
 
                             <div className="comment-about">
                                 <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
-                                <div className="artist-left">
-                                    <ArtistCard />
-                                </div>
                                 <div className="comment-right">
                                     <p>{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
                                 </div>
