@@ -39,7 +39,7 @@ const SongCard = ({ song }) => {
 
     return (
         <div key={song.id} className={`song-container`} >
-            <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => setShowPlay(true)} onMouseLeave={() => setShowPlay(isPlaying)}>
+            <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
                 <img className={`song-image ${song.id}`} src={song.imageUrl} />
             </Link>
             <img className={(showPlay) ? `play-song-button` : `play-song-button hidden`}
