@@ -68,6 +68,15 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             barWidth: 2,
             height: 100,
             hideScrollbar: true,
+            xhr: {
+                cache: "default",
+                mode: "cors",
+                method: "GET",
+                headers: [
+                    { key: "cache-control", value: "no-cache" },
+                    { key: "pragma", value: "no-cache" }
+                ]
+            },
             plugins: [
                 MarkersPlugin.create({
                     markers: markers
