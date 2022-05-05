@@ -22,7 +22,7 @@ const DynamicSearch = ({ className, placeHolder }) => {
                 }
             })
             .then((data) => {
-                if (!myOptions.items.length) {
+                if (!myOptions.users.length || !myOptions.songs.length) {
                     for (let i = 0; i < data.users.length; i++) {
                         myOptions.users.add(JSON.stringify(data.users[i]));
                     }
@@ -110,7 +110,7 @@ const DynamicSearch = ({ className, placeHolder }) => {
                 ref={dropdownRef}
                 className={`searchMenu ${isActive ? "active" : "inactive"}`}
             >
-                <SearchContainer getItems={dynamicSearch()} reset={resetSearch} />
+                <SearchContainer getItems={dynamicSearch()} setIsActive={setIsActive} />
             </div>
         </>
     );

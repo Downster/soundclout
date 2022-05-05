@@ -1,10 +1,39 @@
 .songs{
-    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     overflow-x: auto;
     gap: 20px;
-    width: 1000px;
-    height: 200px;
+    width: 990px;
+    height: 300px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.container-title{
+    font-size: 24px;
+    color:#333;
+}
+
+.songs-container{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+.songs-liked{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    overflow-x: auto;
+    gap: 20px;
+    width: 990px;
+    height: 600px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.song-container{
+    display: flex;
+    padding-top: 46px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -32,31 +32,34 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
 
     return (
         <>
-            {song &&
-                < div className="song-container">
-                    {commentsLoaded &&
-                        <SongContainerTop sessionUser={sessionUser} song={song} comments={comments} />
-                    }
-                    <div className="song-bottom">
+            <div className="outside-container">
 
-                        <div className="comment-about">
-                            <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
-                            <div className="artist-left">
-                                <ArtistCard />
-                            </div>
-                            <div className="comment-right">
-                                <p>{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
-                            </div>
-                            <div className="comments">
-                                {comments && Object.values(comments).map((comment) => {
-                                    return < CommentCard sessionUser={sessionUser} comment={comment} />
-                                })}
-                            </div>
+                {song &&
+                    < div className="individual-song-container">
+                        {commentsLoaded &&
+                            <SongContainerTop sessionUser={sessionUser} song={song} comments={comments} />
+                        }
+                        <div className="song-bottom">
 
+                            <div className="comment-about">
+                                <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
+                                <div className="artist-left">
+                                    <ArtistCard />
+                                </div>
+                                <div className="comment-right">
+                                    <p>{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
+                                </div>
+                                <div className="comments">
+                                    {comments && Object.values(comments).map((comment) => {
+                                        return < CommentCard sessionUser={sessionUser} comment={comment} />
+                                    })}
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </>
     )
 }

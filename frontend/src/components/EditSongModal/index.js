@@ -77,7 +77,7 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
         <div className="modal">
             <button className="modal-close" onClick={closeModal}><i class="fa-solid fa-xmark"></i></button>
 
-            <div className='modal-container'>
+            <div className='modal-container-edit'>
                 <div className="edit-song-header">
                     <h1>Basic Info</h1>
 

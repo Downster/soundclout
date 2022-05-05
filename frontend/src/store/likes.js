@@ -26,7 +26,6 @@ export const getAllLikes = () => async (dispatch) => {
 
     if (res.ok) {
         const likes = await res.json()
-        console.log(likes)
         dispatch(getLikes(likes))
     }
 }

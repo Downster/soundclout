@@ -1,12 +1,26 @@
 .searchMenu{
     width: 392px;
     position: absolute;
-    height: fit-content;
-    background-color: #111111
+    height: 410px;
+    background-color: #111111;
+    overflow: hidden;
+    z-index: 10000;
+}
+.fa-search{
+    color: #999999;
+    margin-right: 10px;
+    font-size: 13px;
 }
 
 .search-link{
-    color: #999999
+    color: #999999;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.toDoSearchLink{
+    margin-top: 15px;
+    margin-left: 10px;
 }
 
 .inactive{

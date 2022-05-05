@@ -79,6 +79,7 @@
 #wavesurfer{
     width:840px;
     height: 100px;
+    z-index: 20;
     
 }
 

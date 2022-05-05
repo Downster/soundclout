@@ -2,5 +2,32 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 20px;
 
+}
+
+.log-in-button{
+    border: 1px solid #f50;
+    background-color: #f50;
+    color: #fff;
+    height: 40px;
+    border-radius: 2px;
+    font-size: 18px;
+}
+
+.sign-in-input{
+    height: 40px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-left: 8px;
+    padding-bottom: 5px;
+    border: 1px solid #9a9a9a;
+    border-radius: 5px;
+}
+
+.sign-in-input::placeholder{
+    color: #9a9a9a;
+}
+.sign-in-input:focus{
+    outline-color: #999999
 }

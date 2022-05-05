@@ -81,6 +81,7 @@ progress{
 }
 
 .upload-song-container{
+    padding-top: 46px;
     display: flex;
     width: 1240px;
     height: 100%;
