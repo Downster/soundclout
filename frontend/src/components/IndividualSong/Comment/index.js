@@ -75,9 +75,10 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
             {sessionUser && <div className="comment-container">
                 <div className="comment-form">
 
-                    <img className="user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
+                    <img className="comment-user-image" src={(sessionUser) ? sessionUser.imageUrl : 'https://imgur.com/hdrdJxY.jpg'} />
                     <form onSubmit={(e) => submitComment(e)}>
                         <input
+                            className="input-comment"
                             type='text'
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
@@ -88,20 +89,20 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
                 </div>
                 <div className="comment-buttons">
 
-                    <button onClick={(isLiked) ? undoLike : submitLike}>
+                    <button className={(isLiked) ? 'like-button liked' : 'like-button'} onClick={(isLiked) ? undoLike : submitLike}>
                         <i className={(isLiked) ? "fa-solid fa-heart liked" : "fa-solid fa-heart"}></i>
                         {(isLiked) ? 'Liked' : 'Like'}
                     </button>
                     {canEdit &&
-                        <button onClick={() => setShowEdit(!showEdit)}>
+                        <button className='edit-button' onClick={() => setShowEdit(!showEdit)}>
                             <i className="fa-solid fa-pencil"></i>
                             Edit
                         </button>
                     }
-                    <button onClick={remove}>
+                    {canEdit && <button className='edit-button' onClick={remove}>
                         <i class="fa-solid fa-trash"></i>
                         Delete
-                    </button>
+                    </button>}
                 </div>
             </div>}
         </>

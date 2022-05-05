@@ -32,47 +32,43 @@ function SignupFormModal({ setSignUp }) {
             <button className="modal-close" onClick={closeModal}><i class="fa-solid fa-xmark"></i></button>
             <div className="modal-container">
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='sign-up-form'>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
-                    <label>
-                        Email
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Username
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Password
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Confirm Password
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <button type="submit">Sign Up</button>
+                    <input
+                        className="sign-in-input"
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        placeholder="Email"
+                    />
+                    <input
+                        className="sign-in-input"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        placeholder="Username"
+                    />
+                    <input
+                        className="sign-in-input"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        placeholder="Password"
+                    />
+                    <input
+                        className="sign-in-input"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                        placeholder="Confirm password"
+                    />
+                    <button className='log-in-button' type="submit">Sign Up</button>
                 </form>
             </div>
         </div>

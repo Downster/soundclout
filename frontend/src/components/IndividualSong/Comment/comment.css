@@ -1,10 +1,79 @@
 .comment-container{
     display: flex;
     flex-direction: column;
+    width: 1170px;
 }
 
 .comment-form{
     display: flex;
-    width: 817px;
+    align-items: center;
+    width: 1170px;
     height: 40px;
+    background-color: #f2f2f2;
+    border-right: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.comment-form:focus{
+    background-color: #e5e5e5;
+}
+
+.comment-user-image{
+    width: 40px;
+    height: 40px;
+}
+
+.input-comment{
+    font-size: 14px;
+    margin-left: 8px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1110px;
+    height: 27px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+}
+
+.input-comment::placeholder{
+    color: #9a9a9a;
+}
+.input-comment:focus{
+    outline-color: #9a9a9a
+}
+
+.comment-buttons{
+    margin-top: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #999999;
+}
+
+.fa-heart,
+.fa-pencil,
+.fa-trash{
+    padding-right: 8px;
+}
+.like-button{
+    font-size: 14px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: 1px solid #999999;
+    width: fit-content;
+    height: 26px;
+    border-radius: 3px;
+}
+.like-button.liked{
+    border: 1px solid #f50;
+}
+
+.edit-button{
+        font-size: 14px;
+        margin-right: 5px;
+        background-color: transparent;
+        border: 1px solid #999999;
+        width: fit-content;
+        height: 26px;
+        border-radius: 3px;
 }

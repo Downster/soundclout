@@ -1,30 +1,36 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDetectOutsideClick } from "../detectClick/useDetectOutsideClick";
-import SearchContainer from "../searchContainer/searchContainer";
+import { useDetectOutsideClick } from "../DetectClick"
+import SearchContainer from "../SearchContainer"
+import { csrfFetch } from "../../store/csrf";
+import './dynamicSearch.css'
 
 const DynamicSearch = ({ className, placeHolder }) => {
     const dropdownRef = useRef(null);
     const [myOptions, setMyOptions] = useState({
-        items: [],
+        users: new Set(),
+        songs: new Set(),
         searchTerm: "",
     });
     const [value, setValue] = useState("");
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
     useEffect(() => {
-        fetch("/api/search")
+        csrfFetch("/api/search")
             .then((response) => {
                 if (response.ok) {
                     return response.json();
                 }
             })
             .then((data) => {
-                if (!myOptions.items.length) {
-                    for (let i = 0; i < data.length; i++) {
-                        myOptions.items.push(data[i]);
+                if (!myOptions.users.length || !myOptions.songs.length) {
+                    for (let i = 0; i < data.users.length; i++) {
+                        myOptions.users.add(JSON.stringify(data.users[i]));
+                    }
+                    for (let i = 0; i < data.songs.length; i++) {
+                        myOptions.songs.add(JSON.stringify(data.songs[i]));
                     }
                     setMyOptions(myOptions);
+
                 } else {
                     getDataFromAPI();
                 }
@@ -32,28 +38,18 @@ const DynamicSearch = ({ className, placeHolder }) => {
     }, []);
 
     const getDataFromAPI = () => {
-        console.log("Options Fetched from API");
-
-        fetch("/api/search")
+        csrfFetch("/api/search")
             .then((response) => {
                 if (response.ok) {
                     return response.json();
                 }
             })
             .then((data) => {
-                //console.log(data);
-                /* figure out a way to compare in 0(n) time???  */
-                for (let i = 0; i < data.length; i++) {
-                    let shouldPush = true;
-                    for (let j = 0; j < data.length; j++) {
-                        if (data[j].content === data[i].content) {
-                            shouldPush = false;
-                            break;
-                        }
-                    }
-                    if (shouldPush) {
-                        myOptions.items.push(data[i]);
-                    }
+                for (let i = 0; i < data.users.length; i++) {
+                    myOptions.users.add(JSON.stringify(data.users[i]));
+                }
+                for (let i = 0; i < data.songs.length; i++) {
+                    myOptions.songs.add(JSON.stringify(data.songs[i]));
                 }
                 setMyOptions(myOptions);
             });
@@ -66,10 +62,28 @@ const DynamicSearch = ({ className, placeHolder }) => {
     };
 
     const dynamicSearch = () => {
-        if (myOptions.todos !== undefined) {
-            return myOptions.items.filter((todo) =>
-                todo.content.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+        if (myOptions.users !== undefined && myOptions.songs !== undefined) {
+            const usersArray = []
+            const songsArray = []
+            myOptions.users.forEach((user) => {
+                const parsedUser = JSON.parse(user)
+                usersArray.push(parsedUser)
+            })
+
+            myOptions.songs.forEach((song) => {
+                const parsedSong = JSON.parse(song)
+                songsArray.push(parsedSong)
+            })
+            const filteredUsers = usersArray.filter((user) => {
+                return user.username.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+            }
             );
+            const filteredSongs = songsArray.filter((song) => {
+                return song.title.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
+            }
+            );
+            return (filteredUsers.concat(filteredSongs))
+
         } else {
             return [];
         }
@@ -96,7 +110,7 @@ const DynamicSearch = ({ className, placeHolder }) => {
                 ref={dropdownRef}
                 className={`searchMenu ${isActive ? "active" : "inactive"}`}
             >
-                <SearchContainer getItems={dynamicSearch()} reset={resetSearch} />
+                <SearchContainer getItems={dynamicSearch()} setIsActive={setIsActive} />
             </div>
         </>
     );

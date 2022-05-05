@@ -3,14 +3,17 @@
 }
 
 .liked{
-    color: red
+    color: #f50;
 }
 
-.song-container{
+.individual-song-container{
+    padding-top: 46px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 1240px;
+    height: 100%;
+    background-color: #fff;
+    padding-bottom: 46px;
 }
 
 .song-bottom{

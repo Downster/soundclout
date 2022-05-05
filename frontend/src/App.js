@@ -19,6 +19,8 @@ import { getAllGenres } from "./store/genres";
 
 
 function App() {
+  const isPlaying = useSelector(state => state.currentSong.isPlaying)
+  const genres = useSelector(state => state.genres)
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasSong, setHasSong] = useState(false)
@@ -26,6 +28,12 @@ function App() {
   const [showSignIn, setSignIn] = useState(false)
   const [showSignUp, setSignUp] = useState(false)
   const sessionUser = useSelector(state => state.session.user);
+
+  useEffect(() => {
+    if (isPlaying) {
+      setHasSong(true)
+    }
+  }, [isPlaying])
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllLikes())
@@ -45,26 +53,32 @@ function App() {
       <Switch>
         <Route exact path='/'>
           {(sessionUser) ? <Redirect to='/discover' /> : <SplashPage isLoaded={isLoaded} hasSong={hasSong} setSignIn={setSignIn} setSignUp={setSignUp} />}
-          <SongPlayer />
+          <SongPlayer hasSong={hasSong} />
         </Route>
         <Route path='/upload'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
           {(sessionUser) ?
-            <EditOrUploadSong sessionUser={sessionUser} options={'upload'} /> : <h1>Please login</h1>
+            <EditOrUploadSong sessionUser={sessionUser} options={'upload'} /> : <LoginFormModal setSignIn={setSignIn} uploadDenied={true} />
           }
-          <SongPlayer />
+          <SongPlayer hasSong={hasSong} />
         </Route>
         <Route path='/songs/:songId'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
           <IndividualSong sessionUser={sessionUser} setShowEdit={setShowEdit} showEdit={showEdit} />
-          <SongPlayer />
+          <SongPlayer hasSong={true} />
         </Route>
         <Route path='/discover'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
-          <div className="discover-songs">
-            <ShowSongs />
+          <div className="outside-container">
+            <div className="discover-songs-container">
+              <div className="discover-songs">
+                <ShowSongs genreFilter={14} />
+                <ShowSongs genreFilter={13} />
+                <ShowSongs genreFilter={5} />
+              </div>
+            </div>
           </div>
-          <SongPlayer />
+          <SongPlayer hasSong={hasSong} />
         </Route>
         <Route path='/about'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />

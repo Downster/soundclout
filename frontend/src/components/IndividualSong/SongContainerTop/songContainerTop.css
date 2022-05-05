@@ -47,6 +47,11 @@
     display: flex;
     gap: 5px;
 }
+
+.song-info-container{
+    display: flex;
+    justify-content: space-between;
+}
 .artist-song-info{
     display: flex;
     flex-direction: column;
@@ -74,6 +79,7 @@
 #wavesurfer{
     width:840px;
     height: 100px;
+    z-index: 20;
     
 }
 

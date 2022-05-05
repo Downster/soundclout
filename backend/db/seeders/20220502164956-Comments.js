@@ -27,6 +27,14 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        userId: 3,
+        songId: 2,
+        time: 25.00,
+        body: 'This got me out of the hole',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
 
     ], {});
 

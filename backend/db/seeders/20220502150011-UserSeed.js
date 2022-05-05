@@ -9,19 +9,22 @@ module.exports = {
         {
           username: 'Bob Dole',
           email: 'bob@dole.com',
+          imageUrl: 'https://soundclout.s3.amazonaws.com/kevin.jpeg',
           hashedPassword: password,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           username: 'Beat Lord69',
+          imageUrl: 'https://imgur.com/hdrdJxY.jpg',
           email: 'beat@lord.com',
           hashedPassword: password,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          username: 'John Dangle',
+          username: 'Dan Keta',
+          imageUrl: 'https://soundclout.s3.amazonaws.com/hoseguy.jpg',
           email: 'john@dangle.com',
           hashedPassword: password,
           createdAt: new Date(),
@@ -29,6 +32,7 @@ module.exports = {
         },
         {
           username: 'RollerSkates',
+          imageUrl: 'https://soundclout.s3.amazonaws.com/kevin.jpeg',
           email: 'roller@skates.com',
           hashedPassword: password,
           createdAt: new Date(),
@@ -36,6 +40,7 @@ module.exports = {
         },
         {
           username: 'MusicSnob55',
+          imageUrl: 'https://soundclout.s3.amazonaws.com/kevin.jpeg',
           email: 'musixx@musix.com',
           hashedPassword: password,
           createdAt: new Date(),

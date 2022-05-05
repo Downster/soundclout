@@ -13,6 +13,7 @@ import './songContainerTop.css'
 const SongContainerTop = ({ sessionUser, song, comments }) => {
     const dispatch = useDispatch()
     const currentSong = useSelector(state => state.currentSong)
+    const selectedSong = useSelector(state => state.selectedSong.song)
     const [songDuration, setSongDuration] = useState();
     const [currentTime, setCurrentTime] = useState();
     const [isPlaying, setIsPlaying] = useState(false)
@@ -20,6 +21,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
     const timeInterval = useRef()
     const waveSurfer = useRef(null);
     const markersRef = useRef();
+
 
     // console.log(currentSong.song.seek())
     //setup markers array to push marker objects to
@@ -145,16 +147,22 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             {song &&
                 <div className="top-song-container">
                     <div className="left-div">
-                        <div className="play-info">
-                            <img className='detail-play-button'
-                                alt={(isPlaying) ? 'Play song' : 'Pause song'}
-                                src={(isPlaying) ? require('./images/pause-button.png') : require('./images/play-button.png')}
-                                onClick={(isPlaying) ? pauseCurrentSong : playSong} />
-                            <div className="artist-song-info">
+                        <div className="song-info-container">
 
-                                <h1 className="song-title">{song.title}</h1>
-                                <h2 className="song-creator">{song.artist}</h2>
-                                <Link to={`/${song.User?.username}`} className="song-creator">{song.User?.username}</Link>
+                            <div className="play-info">
+                                <img className='detail-play-button'
+                                    alt={(isPlaying) ? 'Play song' : 'Pause song'}
+                                    src={(isPlaying) ? require('./images/pause-button.png') : require('./images/play-button.png')}
+                                    onClick={(isPlaying) ? pauseCurrentSong : playSong} />
+                                <div className="artist-song-info">
+
+                                    <h1 className="song-title">{song.title}</h1>
+                                    <h2 className="song-creator">{song.artist}</h2>
+                                    <Link to={`/${song.User?.username}`} className="song-creator">{song.User?.username}</Link>
+                                </div>
+                            </div>
+                            <div className="genre-info">
+                                <h1 className="genre-song-top">#{selectedSong.Genre.name}</h1>
                             </div>
                         </div>
                         <div className="wavebar-div">
