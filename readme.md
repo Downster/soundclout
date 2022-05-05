@@ -58,6 +58,7 @@ Users can upload, like, comment on and listen to songs. All files are stored ext
 # Page Views
 
 ### Splash page
+<img src='https://i.imgur.com/GdsyBZj.png'/>
 
 
 ### Login 
