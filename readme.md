@@ -28,7 +28,11 @@ It uses AWS S3 for image and song uploads, Howler.js to handle and load songs, a
    `git clone git@github.com:Downster/doggy-done.git`
 
 2. Install dependencies
-
+   From root: `cd frontend`
+   `npm install`
+   
+   Also from root: 
+   `cd backend`
    `npm install`
 
 3. Create a .env file based on the .env.example given
@@ -49,7 +53,7 @@ It uses AWS S3 for image and song uploads, Howler.js to handle and load songs, a
 # Live
 
 ### Features
-
+Users can upload, like, comment on and listen to songs. All files are stored externally with AWS. The splash page displays the top 8 most liked songs and the discover page displays all songs of certain genres. Users can view a waveform of the song and leave comments at certain times with a reaction. Users can see all of their liked songs by navigating to their library.
 
 # Page Views
 
