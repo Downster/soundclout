@@ -35,7 +35,7 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
             <div className="outside-container-show">
 
                 {song &&
-                    < div className="individual-song-container">
+                    < div className="individual-song-container-detail">
                         {commentsLoaded &&
                             <SongContainerTop sessionUser={sessionUser} song={song} comments={comments} />
                         }
