@@ -21,7 +21,7 @@ const UploadSongForm = ({ sessionUser }) => {
     const [title, setTitle] = useState('')
     const [songName, setSongName] = useState('')
     const [songUrl, setSongUrl] = useState('')
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('https://imgur.com/hdrdJxY.jpg')
     const [progress, setProgress] = useState(0);
     const [song, setSong] = useState(null);
     const [awsTitle, setAwsTitle] = useState('')
@@ -37,17 +37,18 @@ const UploadSongForm = ({ sessionUser }) => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        const formData = new FormData()
-        formData.append('url', songUrl)
-        formData.append('awsTitle', awsTitle)
-        formData.append('userId', sessionUser.id)
-        formData.append('title', title)
-        formData.append('artist', artist)
-        formData.append('genre', genreNameToNum(genre))
-        formData.append('image', image)
-        formData.append('description', description)
-        formData.append('caption', caption)
-        formData.append('private', privacy)
+        const formData = {
+            url: songUrl,
+            awsTitle,
+            userId: sessionUser.id,
+            title,
+            artist,
+            genre: genreNameToNum(genre),
+            imageUrl: image,
+            description,
+            caption,
+            privacy
+        }
         const error = await dispatch(createSong(formData))
         if (error) {
             setErrors(error.errors)
@@ -56,21 +57,41 @@ const UploadSongForm = ({ sessionUser }) => {
         }
     };
 
+
+    const uploadImage = (fileName, file) => {
+        const params = {
+            Key: fileName,
+            Bucket: 'soundclout',
+            Body: file,
+            ContentType: file.type,
+            ACL: 'public-read'
+        }
+
+        s3.putObject(params)
+            .send((err) => {
+                if (err) console.log(err)
+            })
+    }
+
     const updateFile = async (e, type) => {
         const file = e.target.files[0];
-        setSongName(file.name)
+        console.log(e.target.files)
         if (!isUploaded) {
             setIsUploaded(!isUploaded)
         }
         const fileName = uuidv4() + file.name
         if (type === 'song') {
+            setSongName(file.name)
             setSong(file);
             uploadAudio(fileName, file)
             setSongUrl(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
             setAwsTitle(fileName)
         }
         if (type === 'image') {
-            setImage(file)
+            uploadImage(fileName, file)
+            setTimeout(() => {
+                setImage(`http://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+            }, 3000)
         }
     };
 
@@ -146,12 +167,10 @@ const UploadSongForm = ({ sessionUser }) => {
                             </div>
                             <div className="image-form-container">
                                 <div className="image-edit">
-
-                                    <img className='song-image-upload' src='' />
+                                    <img className='song-image-edit' src={image} />
                                     <input className="upload-image"
                                         type='file'
                                         onChange={(e) => updateFile(e, 'image')}
-                                        placeholder="Upload image"
                                     />
                                 </div>
 

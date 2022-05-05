@@ -32,7 +32,7 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
 
     return (
         <>
-            <div className="outside-container">
+            <div className="outside-container-show">
 
                 {song &&
                     < div className="individual-song-container">

@@ -75,7 +75,10 @@ export const edit = (id, song) => async (dispatch) => {
 export const createSong = (song) => async (dispatch) => {
     const res = await csrfFetch('/api/songs', {
         method: 'POST',
-        body: song
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(song)
     });
 
     if (res.ok) {

@@ -2,12 +2,9 @@ const { uploadAudio, uploadImage, deleteAudio } = require('../../utils/awsUpload
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const db = require("../../db/models");
-const crypto = require('crypto');
-const multer = require('multer')
 const { memoryStorage } = require('multer')
 const { requireAuth } = require('../../utils/auth')
 const storage = memoryStorage()
-const upload = multer({ storage })
 const router = express.Router();
 
 
@@ -76,13 +73,10 @@ router.patch('/:songId', requireAuth, asyncHandler(async (req, res, next) => {
 
 
 router.post('/',
-    upload.fields([
-        { name: 'image', maxCount: 1 }
-    ]),
     requireAuth,
     asyncHandler(
         async (req, res, next) => {
-            const { url, title, userId, description, caption, private, awsTitle, genre, artist } = req.body
+            const { url, title, userId, imageUrl, description, caption, private, awsTitle, genre, artist } = req.body
             if (!title || !artist) {
                 const errors = []
                 const error = new Error('Invalid input')
@@ -97,25 +91,25 @@ router.post('/',
                 error.status = 400;
                 next(error)
             } else {
-                let imageName,
-                    imageFile,
-                    imageType,
-                    imageLink;
-                //create image name with unique ID to prevent having files with the same name
-                if (req.files.image) {
-                    imageName = crypto.randomUUID() + req.files.image[0].originalname
-                    imageFile = req.files.image[0].buffer
-                    imageType = req.files.image[0].mimetype
-                    imageLink = await uploadImage(imageName, imageType, imageFile)
-                    console.log(imageLink)
-                }
+                // let imageName,
+                //     imageFile,
+                //     imageType,
+                //     imageLink;
+                // //create image name with unique ID to prevent having files with the same name
+                // if (req.files.image) {
+                //     imageName = crypto.randomUUID() + req.files.image[0].originalname
+                //     imageFile = req.files.image[0].buffer
+                //     imageType = req.files.image[0].mimetype
+                //     imageLink = await uploadImage(imageName, imageType, imageFile)
+                //     console.log(imageLink)
+                // }
 
                 const song = await db.Song.create({
                     userId,
                     url,
                     awsTitle,
                     genreId: genre,
-                    imageUrl: imageLink,
+                    imageUrl,
                     title,
                     artist,
                     description,
