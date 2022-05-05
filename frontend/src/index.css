@@ -81,7 +81,9 @@ body{
 
 .stream-songs{
     display: flex;
-    height: fit-content;
+    overflow-y: auto;
+    height: 90%;
+    overflow-x: hidden;
 }
 
 

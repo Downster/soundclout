@@ -82,7 +82,8 @@ const DynamicSearch = ({ className, placeHolder }) => {
                 return song.title.toLowerCase().includes(myOptions.searchTerm.toLowerCase())
             }
             );
-            return (filteredUsers.concat(filteredSongs))
+            //only returning songs because user page is not built yet
+            return (filteredSongs)
 
         } else {
             return [];

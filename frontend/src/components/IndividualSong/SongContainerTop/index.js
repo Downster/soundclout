@@ -158,7 +158,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
 
                                     <h1 className="song-title">{song.title}</h1>
                                     <h2 className="song-creator">{song.artist}</h2>
-                                    <Link to={`/${song.User?.username}`} className="song-creator">{song.User?.username}</Link>
+                                    <h2 className='song-creator'>{song.User?.username}</h2>
                                 </div>
                             </div>
                             <div className="genre-info">
