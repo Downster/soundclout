@@ -85,5 +85,15 @@ input[type="range"]::-ms-fill-upper {
   background-color: #9a905d;
 }
 
+.mini-song-card{
+    display: flex;
+}
+
+.song-card-text{
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
 
 

@@ -18,6 +18,7 @@ import { getAllLikes } from './store/likes'
 import { getAllGenres } from "./store/genres";
 import { getUserLikes } from "./store/userLikes";
 import LibraryContainer from "./components/LibraryContainer";
+import AboutComponent from "./components/AboutComponent";
 
 
 function App() {
@@ -91,6 +92,13 @@ function App() {
         </Route>
         <Route path='/about'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
+          <div className="outside-container-about">
+            <div className="discover-songs-container">
+              <div className="discover-songs">
+                <AboutComponent />
+              </div>
+            </div>
+          </div>
         </Route>
         <Route path='/stream'>
           <Navigation setSignIn={setSignIn} setSignUp={setSignUp} />
