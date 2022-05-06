@@ -79,7 +79,7 @@ const UploadSongForm = ({ sessionUser }) => {
         if (type === 'song') {
             if (file.type.includes('audio')) {
                 setErrors([])
-                setIsUploaded(!isUploaded)
+                setIsUploaded(true)
                 setSongName(file.name)
                 setSong(file);
                 uploadAudio(fileName, file)
@@ -104,6 +104,7 @@ const UploadSongForm = ({ sessionUser }) => {
     };
 
     const uploadAudio = (fileName, file) => {
+        setProgress(0)
         const params = {
             Key: fileName,
             Bucket: 'soundclout',
