@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { edit } from '../../store/songs';
+import { addSelectedSong } from "../../store/selectedSong";
 import AWS from 'aws-sdk'
 import { v4 as uuidv4 } from 'uuid';
 import genreNameToNum from "../../utils/genreNameToNum";
@@ -31,7 +32,7 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
             title,
             description,
             caption,
-            genre: genreNameToNum(genre),
+            genreId: genreNameToNum(genre),
             imageUrl: image,
             private: privacy,
             artist
@@ -83,89 +84,114 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
             <button className="modal-close" onClick={closeModal}><i class="fa-solid fa-xmark"></i></button>
 
             <div className='modal-container-edit'>
-                <div className="edit-song-header">
-                    <h1>Basic Info</h1>
+                <div className="upload-modal-container">
+                    <div className="upload-song-edit">
+                        <div className="upload-song-header">
+                            <h1 className="basic-info">Basic Info</h1>
 
 
-                </div>
-                <div className="image-form-container">
-                    <div className="image-edit">
-                        <img className='song-image-edit' src={image} />
-                        <input className="upload-image"
-                            type='file'
-                            onChange={(e) => updateFile(e)}
-                        />
-                    </div>
-
-                    <div className='edit-song-form'>
-                        <div className="errors">
-                            {errors && errors.map((error, idx) => {
-                                return <h1 key={idx}> {error}</h1>
-                            })}
                         </div>
-                        <label>Title</label>
-                        <input
-                            required
-                            type='text'
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                        <label>Artist</label>
-                        <input
-                            required
-                            type='text'
-                            value={artist}
-                            onChange={(e) => setArtist(e.target.value)}
-                        />
-                        <label>Genre</label>
-                        <select
-                            onChange={({ target: { value } }) => setGenre(value)}
-                            value={genre}
-                        >
-                            {Object.values(genres).map((genre) => (
-                                <option
-                                    key={genre.id}
-                                    value={genre.name}
-                                >
-                                    {genre.name}
-                                </option>
-                            ))}
-                        </select>
-                        <label>Description</label>
-                        <textarea
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                        <label>Caption</label>
-                        <textarea
-                            value={caption}
-                            onChange={(e) => setCaption(e.target.value)}
-                        />
-                        <label>Privacy:</label>
-                        <label>
+                        <div className="image-form-container">
+                            <div className="image-edit">
+                                <img className='song-image-edit' src={image} />
+                                <input className="upload-image"
+                                    type='file'
+                                    onChange={(e) => updateFile(e)}
+                                />
+                            </div>
 
-                            <input
-                                type='radio'
-                                value='yes'
-                                name='privacy'
-                                checked={privacy === 'public'}
-                                onChange={() => setPrivacy('public')}
-                            />
-                            Public
-                        </label>
-                        <label>
-                            <input
-                                type='radio'
-                                value='no'
-                                name='privacy'
-                                checked={privacy === 'private'}
-                                onChange={() => setPrivacy('private')}
-                            />
-                            Private
-                        </label>
-                        <button className='submit-song' onClick={(e) => handleSubmit(e)}>Edit Song</button>
+                            <div className='edit-song-form'>
+                                <div className="errors">
+                                    {errors && errors.map((error, idx) => {
+                                        return <h1 key={idx}> {error}</h1>
+                                    })}
+                                </div>
+                                <label>Title</label>
+                                <input
+                                    className="upload-input"
+                                    required
+                                    type='text'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+                                <label>Artist</label>
+                                <input
+                                    className="upload-input"
+                                    required
+                                    type='text'
+                                    value={artist}
+                                    onChange={(e) => setArtist(e.target.value)}
+                                />
+                                <label>Genre</label>
+                                <select
+                                    className="upload-input-genre"
+                                    onChange={({ target: { value } }) => setGenre(value)}
+                                    value={genre}
+                                >
+                                    {Object.values(genres).map((genre) => (
+                                        <option
+                                            key={genre.id}
+                                            value={genre.name}
+                                        >
+                                            {genre.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <label>Description</label>
+                                <textarea
+                                    className="upload-input-description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
+                                <label>Caption</label>
+                                <textarea
+                                    className="upload-input-caption"
+                                    value={caption}
+                                    onChange={(e) => setCaption(e.target.value)}
+                                />
+                                <label>Privacy:</label>
+
+                                <div className="public-radio">
+                                    <input
+                                        className="upload-input-radio"
+                                        type='radio'
+                                        value='yes'
+                                        name='privacy'
+                                        checked={privacy === 'public'}
+                                        onChange={() => setPrivacy('public')}
+                                    />
+                                    <label>
+                                        Public
+                                    </label>
+                                </div>
+
+                                <div className="private-radio">
+                                    <input
+                                        className="upload-input-radio"
+                                        type='radio'
+                                        value='no'
+                                        name='privacy'
+                                        checked={privacy === 'private'}
+                                        onChange={() => setPrivacy('private')}
+                                    />
+                                    <label>
+                                        Private
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bottom-buttons-upload">
+                            <div className="button-container-upload">
+                                <div className="required-text">
+                                    <p className="asterisk">*</p>
+                                    <p className="texty">Required fields</p>
+                                </div>
+
+                                <button className='submit-song-button' onClick={(e) => handleSubmit(e)}>Save</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div >
             </div>
         </div>
     )

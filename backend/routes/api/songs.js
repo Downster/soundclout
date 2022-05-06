@@ -32,7 +32,7 @@ router.delete('/:songId', requireAuth, asyncHandler(async (req, res) => {
 }))
 
 router.patch('/:songId', requireAuth, asyncHandler(async (req, res, next) => {
-    const { title, artist, description, caption, imageUrl, private, genre } = req.body
+    const { title, artist, description, caption, imageUrl, private, genreId } = req.body
     const { songId } = req.params
     if (!title || !artist) {
         const errors = []
@@ -53,7 +53,7 @@ router.patch('/:songId', requireAuth, asyncHandler(async (req, res, next) => {
             title,
             imageUrl,
             artist,
-            genre,
+            genreId,
             description,
             caption,
             private: (private === 'public') ? false : true

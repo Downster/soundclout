@@ -46,7 +46,7 @@ function LoginFormModal({ setSignIn, uploadDenied }) {
             <div className='modal-container-sign-in'>
                 <form onSubmit={handleSubmit} className='sign-in-form'>
                     <ul>
-                        {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        {errors && errors.map((error, idx) => <li key={idx} className='error-text'>{error}</li>)}
                     </ul>
                     <input className='sign-in-input'
                         type="text"

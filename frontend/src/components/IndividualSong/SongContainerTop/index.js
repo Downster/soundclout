@@ -170,7 +170,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
                                 </div>
                             </div>
                             <div className="genre-info">
-                                <h1 className="genre-song-top">#{selectedSong.Genre.name}</h1>
+                                <h1 className="genre-song-top">#{song.Genre.name}</h1>
                             </div>
                         </div>
                         <div className="wavebar-div">

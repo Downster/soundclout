@@ -15,6 +15,8 @@
     border-bottom: 1px solid #e5e5e5;
 }
 
+
+
 .comment-form:focus{
     background-color: #e5e5e5;
 }
@@ -63,9 +65,21 @@
     width: fit-content;
     height: 26px;
     border-radius: 3px;
+    cursor: pointer;
 }
 .like-button.liked{
     border: 1px solid #f50;
+}
+
+.like-button:hover{
+    font-size: 14px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: 1px solid #7a7979;
+    width: fit-content;
+    height: 26px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 .edit-button{
@@ -76,4 +90,16 @@
         width: fit-content;
         height: 26px;
         border-radius: 3px;
+        cursor: pointer;
+}
+
+.edit-button:hover{
+    font-size: 14px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: 1px solid #7a7979;
+    width: fit-content;
+    height: 26px;
+    border-radius: 3px;
+    cursor: pointer;
 }

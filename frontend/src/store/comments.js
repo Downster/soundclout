@@ -88,6 +88,9 @@ export const editCurrentComment = (comment) => async (dispatch) => {
     if (res.ok) {
         const comment = await res.json()
         dispatch(editComment(comment))
+    } else {
+        const errors = await res.json()
+        return errors
     }
 
 }

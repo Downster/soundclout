@@ -16,6 +16,11 @@
     padding-bottom: 46px;
 }
 
+.total-comments{
+    margin-top: 5px;
+    font-size: 14px;
+}
+
 .individual-song-container-detail{
     display: flex;
     flex-direction: column;

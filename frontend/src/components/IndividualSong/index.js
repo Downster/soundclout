@@ -44,7 +44,7 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
                             <div className="comment-about">
                                 <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
                                 <div className="comment-right">
-                                    <p>{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
+                                    <p className="total-comments">{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
                                 </div>
                                 <div className="comments">
                                     {comments && Object.values(comments).map((comment) => {
