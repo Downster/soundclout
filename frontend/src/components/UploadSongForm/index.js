@@ -89,7 +89,7 @@ const UploadSongForm = ({ sessionUser }) => {
         if (type === 'image') {
             uploadImage(fileName, file)
             setTimeout(() => {
-                setImage(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+                setImage(`http://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
             }, 3000)
         }
     };
