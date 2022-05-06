@@ -220,7 +220,7 @@ module.exports = {
         url: 'https://soundclout.s3.amazonaws.com/Quiet%2C+Heavy+Dreams.mp3',
         imageUrl: 'https://soundclout.s3.amazonaws.com/quiet-heavy-album.jpeg',
         awsTitle: 'Traveling+Man.mp3',
-        description: 'My favorite Waxahatchee song',
+        description: 'My favorite Zach Bryan song',
         caption: '',
         genreId: 5,
         private: false,

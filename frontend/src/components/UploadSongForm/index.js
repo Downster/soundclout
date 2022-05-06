@@ -272,16 +272,16 @@ const UploadSongForm = ({ sessionUser }) => {
                                             />
                                             <label>Private</label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="bottom-buttons-upload-edit">
-                                    <div className="button-container-upload">
-                                        <div className="required-text">
-                                            <p className="asterisk">*</p>
-                                            <p className="texty">Required fields</p>
-                                        </div>
+                                        <div className="bottom-buttons-upload-edit">
+                                            <div className="button-container-upload">
+                                                <div className="required-text">
+                                                    <p className="asterisk">*</p>
+                                                    <p className="texty">Required fields</p>
+                                                </div>
 
-                                        <button className='submit-song-button' onClick={(e) => handleSubmit(e)}>Save</button>
+                                                <button className='submit-song-button' onClick={(e) => handleSubmit(e)}>Save</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
