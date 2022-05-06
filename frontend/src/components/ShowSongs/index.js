@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, } from "react"
 import { getSongs } from "../../store/songs"
 import SongCard from '../SongCard'
+import { getAllLikes } from "../../store/likes"
+import { getUserLikes } from "../../store/userLikes"
 import './ShowSongs.css'
 
 
@@ -13,11 +15,20 @@ const ShowSongs = ({ genreFilter, sessionUser }) => {
     const likes = useSelector(state => state.likes)
     const userLikes = useSelector(state => state.userLikes)
     const userSongs = (Object.values(userLikes).map((song) => song.songId))
+    const userId = sessionUser?.id
     const songIds = new Set()
     let currentGenre = null;
     if (genreFilter !== 'all' && genre) {
         currentGenre = genre[genreFilter]?.name
     }
+    useEffect(() => {
+        dispatch(getSongs())
+        dispatch(getAllLikes())
+        dispatch(getUserLikes(userId))
+        if (userId) {
+            dispatch(getUserLikes(userId))
+        }
+    }, [dispatch, sessionUser])
 
 
     const generateMostLiked = () => {

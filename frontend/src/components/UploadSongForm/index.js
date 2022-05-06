@@ -75,22 +75,30 @@ const UploadSongForm = ({ sessionUser }) => {
 
     const updateFile = async (e, type) => {
         const file = e.target.files[0];
-        if (!isUploaded) {
-            setIsUploaded(!isUploaded)
-        }
         const fileName = uuidv4() + file.name
         if (type === 'song') {
-            setSongName(file.name)
-            setSong(file);
-            uploadAudio(fileName, file)
-            setSongUrl(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
-            setAwsTitle(fileName)
+            if (file.type.includes('audio')) {
+                setIsUploaded(!isUploaded)
+                setSongName(file.name)
+                setSong(file);
+                uploadAudio(fileName, file)
+                setSongUrl(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+                setAwsTitle(fileName)
+            } else {
+                setErrors(['You must upload an audio file'])
+                e.target.value = null
+            }
         }
         if (type === 'image') {
-            uploadImage(fileName, file)
-            setTimeout(() => {
-                setImage(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
-            }, 3000)
+            if (file.type.includes('image')) {
+                uploadImage(fileName, file)
+                setTimeout(() => {
+                    setImage(`https://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+                }, 3000)
+            } else {
+                setErrors(['You must upload an image file'])
+                e.target.value = null
+            }
         }
     };
 
@@ -126,6 +134,11 @@ const UploadSongForm = ({ sessionUser }) => {
                 <div className="upload-first-song">
                     <div className="upload-song-container">
                         <div className='upload-song first'>
+                            <div className="errors">
+                                {errors && errors.map((error, idx) => {
+                                    return <h1 key={idx}> {error}</h1>
+                                })}
+                            </div>
                             <button className='upload-song-button' onClick={showSongInput}>Choose a file to Upload</button>
                             <div className="file-upload">
                                 <h1>{songName}</h1>

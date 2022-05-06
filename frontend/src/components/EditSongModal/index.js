@@ -46,11 +46,16 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
 
     const updateFile = async (e) => {
         const file = e.target.files[0];
-        const fileName = uuidv4() + file.name
-        uploadImage(fileName, file)
-        setTimeout(() => {
-            setImage(`http://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
-        }, 3000)
+        if (file.type.includes('image')) {
+            const fileName = uuidv4() + file.name
+            uploadImage(fileName, file)
+            setTimeout(() => {
+                setImage(`http://${process.env.REACT_APP_S3_BUCKET}.s3.amazonaws.com/${fileName}`)
+            }, 3000)
+        } else {
+            setErrors(['You must upload an image file'])
+            e.target.value = null
+        }
     };
 
     const uploadImage = (fileName, file) => {

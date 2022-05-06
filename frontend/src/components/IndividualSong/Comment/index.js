@@ -7,7 +7,9 @@ import { useHistory } from "react-router-dom"
 import { createComment } from "../../../store/comments"
 import { useSelector } from "react-redux"
 import { removeLike, addOneLike } from "../../../store/likes"
+import { getUserLikes, clearUserLike } from "../../../store/userLikes"
 import './comment.css'
+
 
 const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const history = useHistory()
@@ -20,6 +22,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
     const time = useSelector(state => state.selectedSong.time)
     const likes = useSelector(state => state.likes[songId])
     const [errors, setErrors] = useState([])
+    const userId = sessionUser?.id
 
     useEffect(() => {
         if (sessionUser && likes && likes[sessionUser.id]) {
@@ -28,7 +31,7 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
         if (sessionUser && sessionUser.id === song.userId) {
             setCanEdit(true)
         }
-    }, [])
+    }, [likes, sessionUser, song.userId])
 
     useEffect(() => {
         dispatch(addSelectedSong(selectedSong))
@@ -64,12 +67,14 @@ const Comment = ({ sessionUser, song, setShowEdit, showEdit }) => {
         }
         const done = dispatch(addOneLike(like))
         if (done) {
+            dispatch(getUserLikes(sessionUser.id))
             setIsLiked(true)
         }
     }
 
-    const undoLike = () => {
-        const done = dispatch(removeLike(likes[sessionUser.id].id))
+    const undoLike = async () => {
+        const done = await dispatch(removeLike(likes[sessionUser.id].id))
+        dispatch(clearUserLike(song.id))
         if (done) {
             setIsLiked(false)
         }
