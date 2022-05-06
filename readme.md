@@ -58,10 +58,10 @@ Users can upload, like, comment on and listen to songs. All files are stored ext
 # Page Views
 
 ### Splash page
+This is where a list of the 8 most liked songs appear. Users and non-users alike can listen to songs displayed on this page.
 <img src='https://i.imgur.com/GdsyBZj.png'/>
 
-
-### Login 
+### Song Detail Page
 
 
 ### Sign-up
