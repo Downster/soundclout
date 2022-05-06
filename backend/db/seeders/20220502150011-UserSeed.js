@@ -54,6 +54,14 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          username: 'Leos Vest',
+          imageUrl: 'https://www.stokesskis.com/wp-content/uploads/2017/10/redevojune.jpg',
+          email: 'leo@joon.io',
+          hashedPassword: password,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ])
 
 

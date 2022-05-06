@@ -178,11 +178,11 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
                             </div>
                             <div className="absolute-time-container">
 
+                                <div className="current-time-show">{(currentTime) ? formatTime(currentTime) : ''}</div>
                                 <div className="time-show-container">
                                     <div className="total-time-show">{(songDuration) ? formatTime(songDuration) : 'Loading...'}</div>
                                 </div>
                             </div>
-                            <div className="current-time-show">{(currentTime) ? formatTime(currentTime) : ''}</div>
 
                         </div>
 

@@ -15,6 +15,17 @@
     font-size: 18px;
 }
 
+.log-in-button-demo{
+    margin-top: 20px;
+    border: 1px solid #f50;
+    background-color: #f50;
+    color: #fff;
+    width: 100%;
+    height: 40px;
+    border-radius: 2px;
+    font-size: 18px;
+}
+
 .sign-in-input{
     height: 40px;
     font-size: 20px;

@@ -63,8 +63,8 @@ function LoginFormModal({ setSignIn, uploadDenied }) {
                         placeholder='Password'
                     />
                     <button className='log-in-button' type="submit">Log In</button>
-                    <button className='log-in-button' onClick={(e) => demoLogin(e)}>Demo User</button>
                 </form>
+                <button className='log-in-button-demo' onClick={(e) => demoLogin(e)}>Demo User</button>
             </div>
         </div >
     );

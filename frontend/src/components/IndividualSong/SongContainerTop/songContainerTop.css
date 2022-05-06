@@ -89,9 +89,9 @@
     justify-content: flex-end;
 }
 .absolute-time-container{
-    position: absolute;
+    display: flex;
+    justify-content: space-between;
     width: 840px;
-    top: 30%;
 }
 .total-time-show{
     display: flex;
@@ -106,10 +106,8 @@
 }
 
 .current-time-show{
-    position: absolute;
     z-index: 10;
     font-size: 10px;
-    background-color: #2a2827;
     top:30%;
     color: #f50;
 }
