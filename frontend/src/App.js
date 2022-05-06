@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import LoginFormModal from "./components/LoginFormModal";
-import SignUpFormPage from "./components/SignUpFormModal";
+import DeveloperComponent from "./components/DeveloperComponent";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import EditSongModal from "./components/EditSongModal";
@@ -23,7 +23,6 @@ import AboutComponent from "./components/AboutComponent";
 
 function App() {
   const isPlaying = useSelector(state => state.currentSong.isPlaying)
-  const genres = useSelector(state => state.genres)
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasSong, setHasSong] = useState(false)
@@ -48,7 +47,7 @@ function App() {
     if (userId) {
       dispatch(getUserLikes(userId))
     }
-  }, [dispatch, sessionUser])
+  }, [dispatch, sessionUser, userId])
 
 
 
@@ -87,6 +86,7 @@ function App() {
                 <ShowSongs genreFilter={5} />
               </div>
             </div>
+            <DeveloperComponent />
           </div>
           <SongPlayer hasSong={hasSong} />
         </Route>
@@ -108,6 +108,7 @@ function App() {
                 <ShowSongs genreFilter={'all'} />
               </div>
             </div>
+            <DeveloperComponent />
           </div>
           <SongPlayer hasSong={hasSong} />
         </Route>

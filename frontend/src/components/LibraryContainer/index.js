@@ -1,6 +1,5 @@
-import Navigation from "../Navigation"
 import ShowSongs from "../ShowSongs"
-
+import DeveloperComponent from "../DeveloperComponent"
 
 const LibraryContainer = ({ sessionUser }) => {
     return (
@@ -11,6 +10,7 @@ const LibraryContainer = ({ sessionUser }) => {
                         <ShowSongs genreFilter={'userLikes'} sessionUser={sessionUser} />
                     </div>
                 </div>
+                <DeveloperComponent />
             </div>
         </>
     )

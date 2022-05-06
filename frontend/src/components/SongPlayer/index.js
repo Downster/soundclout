@@ -11,6 +11,10 @@ const SongPlayer = ({ hasSong }) => {
     const intervalRef = useRef(null)
     const dispatch = useDispatch()
 
+    useEffect(() => {
+
+    }, [hasSong])
+
 
     //check to see if the song has ended so the interval can be cleared and reset
     if (Math.floor(position) === Math.floor(currentSong.duration)) {

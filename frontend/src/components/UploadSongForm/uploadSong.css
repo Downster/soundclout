@@ -243,6 +243,7 @@ progress{
     height: 100vh;
     background-color: #f2f2f2;
     align-items: center;
+    padding-bottom: 30px;
 }
 
 .uploader-container{
@@ -291,6 +292,7 @@ progress{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 35px;
     height: 100vh;
     background-color: #f2f2f2;
     align-items: center;

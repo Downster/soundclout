@@ -9,7 +9,7 @@ import './songCard.css'
 const SongCard = ({ song, all }) => {
     const dispatch = useDispatch()
     const isPlaying = useSelector(state => state.currentSong.isPlaying)
-    const isPaused = useSelector(state => state.currentSong.isPaused)
+    // const isPaused = useSelector(state => state.currentSong.isPaused)
     const [showPlay, setShowPlay] = useState(false)
     const [showPause, setShowPause] = useState(false)
 
@@ -39,15 +39,16 @@ const SongCard = ({ song, all }) => {
 
     return (
         <div key={song.id} className={(showPlay) ? `song-container blur` : 'song-container'} >
-            <img className={(showPause) ? `pause-song-button` : `pause-song-button hidden`}
+            <img alt='pause-button' className={(showPause) ? `pause-song-button` : `pause-song-button hidden`}
                 src={require('./images/pause-button.png')}
                 onClick={() => pause()} />
             <p className={'song-text'}>{song.title}</p>
             <p className={'song-text'}>{song.artist}</p>
-            <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
-                <img className={`song-image ${song.id}`} src={song.imageUrl} />
+            <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => (isPlaying) ? setShowPlay(false) : setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
+                <img alt='song' className={`song-image ${song.id}`} src={song.imageUrl} />
             </Link>
             <img className={(showPlay) ? `play-song-button` : `play-song-button hidden`}
+                alt='pause-button'
                 onMouseOver={() => setShowPlay(true)}
                 src={require('./images/play-button.png')}
                 onClick={() => playSong(song)} />
