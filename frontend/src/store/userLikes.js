@@ -21,14 +21,14 @@ export const clearUserLike = (songId) => async (dispatch) => {
 
 
 export const getUserLikes = (userId) => async (dispatch) => {
+    if (userId) {
+        const res = await csrfFetch(`/api/likes/${userId}`)
 
-    const res = await csrfFetch(`/api/likes/${userId}`)
-
-    if (res.ok) {
-        const likes = await res.json()
-        dispatch(getLikes(likes))
+        if (res.ok) {
+            const likes = await res.json()
+            dispatch(getLikes(likes))
+        }
     }
-    // }
 }
 
 const initialState = {
