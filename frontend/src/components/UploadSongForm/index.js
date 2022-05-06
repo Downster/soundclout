@@ -63,7 +63,7 @@ const UploadSongForm = ({ sessionUser }) => {
             Key: fileName,
             Bucket: 'soundclout',
             Body: file,
-            ContentType: file.type,
+            ContentType: 'image/jpeg',
             ACL: 'public-read'
         }
 
