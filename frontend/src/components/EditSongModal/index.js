@@ -106,7 +106,7 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
                                         return <h1 key={idx}> {error}</h1>
                                     })}
                                 </div>
-                                <label>Title</label>
+                                <label>Title *</label>
                                 <input
                                     className="upload-input"
                                     required
@@ -114,7 +114,7 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
-                                <label>Artist</label>
+                                <label>Artist *</label>
                                 <input
                                     className="upload-input"
                                     required
@@ -181,12 +181,12 @@ const EditSongModal = ({ sessionUser, setShowEdit }) => {
                             </div>
                         </div>
                         <div className="bottom-buttons-upload">
+
                             <div className="button-container-upload">
                                 <div className="required-text">
                                     <p className="asterisk">*</p>
                                     <p className="texty">Required fields</p>
                                 </div>
-
                                 <button className='submit-song-button' onClick={(e) => handleSubmit(e)}>Save</button>
                             </div>
                         </div>

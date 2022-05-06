@@ -90,6 +90,8 @@
     width: 53px;
     border-radius: 2px;
     font-size: 14px;
+    cursor: pointer;
+    z-index: 200;
 }
 
 .upload-input{
@@ -274,6 +276,7 @@ progress{
 .edit-song-form{
     display: flex;
     padding-right: 25px;
+    padding-left: 10px;
     flex-direction: column;
     gap: 15px;
 
@@ -313,8 +316,8 @@ progress{
 .button-container-upload{
     padding-top: 20px;
     padding-left: 15px;
-    padding-right: 15px;
     padding-bottom: 15px;
+    width: 95%;
     display: flex;
     justify-content: space-between;
 }
