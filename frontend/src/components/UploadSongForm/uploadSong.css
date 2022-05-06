@@ -217,6 +217,7 @@ progress{
     background-color: #ffffff;
 }
 
+
 .upload-title-text{
     color: #666666
 }
@@ -306,4 +307,24 @@ progress{
 
 .required-text{
     display: flex;
+}
+
+
+@media screen and (max-height: 800px){
+    .upload-song{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 800px;
+        height: 85%;
+        box-shadow: 0 2px 12px -5px rgb(0 0 0 / 10%);
+        border: 1px solid #f2f2f2;
+        background-color: #ffffff;
+        overflow-y: auto;
+    }
+
+    #root{
+        overflow-y: hidden;
+    }
 }
