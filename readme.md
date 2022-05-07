@@ -9,8 +9,8 @@ View and test out SoundClout on [Heroku](https://soundclout-app.herokuapp.com/)
 |
 [MVP Feature List](https://github.com/Downster/soundclout/wiki/Feature-List) |
 [Database Schema](https://github.com/Downster/soundclout/wiki/Db-Schema) |
-[API Documentation](https://github.com/Downster/doggy-done/wiki/API-Documentation) |
-[Frontend Routes](https://github.com/Downster/doggy-done/wiki/Frontend-Routes) |
+[API Documentation](https://github.com/Downster/soundclout/wiki/API-Documentation) |
+[Frontend Routes](https://github.com/Downster/soundclout/wiki/Frontend-Routes) |
 
 # Technologies Used
 Soundclout is built on a React / Redux frontend, an Express backend, and uses a PostgreSQL database.
@@ -25,7 +25,7 @@ It uses AWS S3 for image and song uploads, Howler.js to handle and load songs, a
 
 1. Clone this repository
 
-   `git clone git@github.com:Downster/doggy-done.git`
+   `git clone git@github.com:Downster/soundclout.git`
 
 2. Install dependencies
    From root: `cd frontend`
