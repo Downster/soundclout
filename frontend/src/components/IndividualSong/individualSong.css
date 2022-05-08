@@ -15,6 +15,11 @@
     background-color: #fff;
     padding-bottom: 46px;
 }
+.comment-right{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 40px;
+}
 
 .total-comments{
     margin-top: 5px;

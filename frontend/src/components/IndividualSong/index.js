@@ -11,12 +11,19 @@ import CommentCard from "./CommentCard"
 
 
 const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
+    const likes = useSelector(state => state.likes)
     const dispatch = useDispatch();
     const { songId } = useParams()
     const [commentsLoaded, setCommentsLoaded] = useState(false)
     const song = useSelector(state => state.songs[songId])
     const comments = useSelector(state => state.comments)
     const totalComments = (Object.keys(comments).length)
+    let totalLikes;
+    if (likes[songId]) {
+        totalLikes = (Object.keys(likes[songId]).length)
+    } else {
+        totalLikes = 0
+    }
 
     useEffect(() => {
         (async () => {
@@ -45,6 +52,7 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
                                 <Comment sessionUser={sessionUser} song={song} setShowEdit={setShowEdit} showEdit={showEdit} />
                                 <div className="comment-right">
                                     <p className="total-comments">{(totalComments === 1) ? totalComments + " comment" : totalComments + ' comments'}</p>
+                                    <p className="total-comments">{(totalLikes === 1) ? totalLikes + " like" : totalLikes + ' likes'}</p>
                                 </div>
                                 <div className="comments">
                                     {comments && Object.values(comments).map((comment) => {
