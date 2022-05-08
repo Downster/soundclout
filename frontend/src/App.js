@@ -45,7 +45,6 @@ function App() {
 
   useEffect(() => {
     if (userId) {
-      console.log(userId)
       dispatch(getUserLikes(userId))
     }
   }, [dispatch, sessionUser, userId])
