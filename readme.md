@@ -35,7 +35,7 @@ It uses AWS S3 for image and song uploads, Howler.js to handle and load songs, a
    `cd backend`
    `npm install`
 
-3. Create a .env file based on the .env.example given
+3. Create a .env file based on the .env.example given for both the frontend and backend
 
 4. Setup your username and database based on what you setup in your .env
 
@@ -44,7 +44,7 @@ It uses AWS S3 for image and song uploads, Howler.js to handle and load songs, a
    `npx dotenv sequelize db:migrate` &&
    `npx dotenv sequelize db:seed:all`
 
-6. Start the app using:
+6. Start the app using in both the frontend and backend directories:
 
    `npm start`
 
