@@ -63,14 +63,10 @@ This is where a list of the 8 most liked songs appear. Users and non-users alike
 
 ### Song Detail Page
 
-
-### Sign-up
-
-
-### Main page view
+This is where you can view a song, its Artist, uploader, genre and comments/likes. There is also a waveform of the song here with comments rendered on it at the time they were made. The waveform is rendered using waversurfer.js. 
+<img src='https://i.imgur.com/GvbcOOE.png'/>
 
 
-### Main page detail view
 
 
 
