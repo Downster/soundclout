@@ -55,8 +55,6 @@ const ShowSongs = ({ genreFilter, sessionUser }) => {
 
 
 
-
-
     useEffect(() => {
         dispatch(getSongs())
     }, [dispatch])

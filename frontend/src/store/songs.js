@@ -65,7 +65,6 @@ export const edit = (id, song) => async (dispatch) => {
 
     if (res.ok) {
         const song = await res.json()
-        console.log(song)
         dispatch(editSong(song))
     } else {
         const errors = await res.json()

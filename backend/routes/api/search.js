@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
 
-    console.log('here')
     const songs = await db.Song.findAll({})
     const users = await db.User.findAll({})
     res.json({
