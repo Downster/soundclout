@@ -39,7 +39,7 @@ export const getComments = (songId) => async (dispatch) => {
         dispatch(loadComment(comments))
         return true
     } else {
-        console.log('error')
+
     }
 }
 
