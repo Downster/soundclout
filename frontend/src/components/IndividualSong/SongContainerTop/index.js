@@ -148,9 +148,9 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         dispatch(pauseSong())
     }
 
-    const setCurrentSong = (selectedSong) => {
+    const setCurrentSong = () => {
         const sound = new Howl({
-            src: selectedSong.url,
+            src: song.url,
             html5: true,
             onend: function () {
                 dispatch(clearSong())
@@ -160,7 +160,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
             }
 
         });
-        dispatch(loadSong(song, song.id))
+        dispatch(loadSong(sound, song.id))
     }
 
 
