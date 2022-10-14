@@ -69,7 +69,6 @@ const songPlayReducer = (state = initialState, action) => {
         case LOAD_SONG:
             nextState.song = action.song
             nextState.songId = action.songId
-            nextState.isPaused = true
             return nextState;
         case RECEIVE_PLAY_SONG:
             if (nextState.song) {
