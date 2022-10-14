@@ -6,10 +6,8 @@ import Comment from "./Comment"
 import { addSelectedSong } from '../../store/selectedSong'
 import { clearLoadedComments, getComments } from '../../store/comments'
 import './individualSong.css'
-import ArtistCard from "./ArtistCard"
 import CommentCard from "./CommentCard"
 import { getSongs } from "../../store/songs"
-import { receivePlaySong } from "../../store/songPlay"
 
 
 const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {

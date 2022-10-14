@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import './songCard.css'
 
 
-const SongCard = ({ song, all }) => {
+const SongCard = ({ song }) => {
     const dispatch = useDispatch()
     const isPlaying = useSelector(state => state.currentSong.isPlaying)
     // const isPaused = useSelector(state => state.currentSong.isPaused)
@@ -34,6 +34,20 @@ const SongCard = ({ song, all }) => {
         setShowPlay(false)
         setShowPause(false)
         dispatch(pauseSong())
+    }
+
+    const setCurrentSong = (song) => {
+        const sound = new Howl({
+            src: song.url,
+            html5: true,
+            onend: function () {
+                dispatch(clearSong())
+            },
+            onload: function () {
+                dispatch(setDuration(sound._duration))
+            }
+
+        });
     }
 
 

@@ -1,15 +1,15 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState, useRef } from "react";
-import { resumeSong, setSeek, pauseSong, restartSong, setRepeat, receivePlaySong } from "../../store/songPlay";
+import { resumeSong, setSeek, pauseSong, restartSong, setRepeat } from "../../store/songPlay";
 import './SongPlayer.css'
 import MiniSongCard from "./MiniSongCard";
 import { formatTime } from "../../utils/formatTime";
 
 const SongPlayer = ({ hasSong }) => {
     const currentSong = useSelector(state => state.currentSong);
+    console.log(currentSong)
     const [position, setPosition] = useState(0)
     const intervalRef = useRef(null)
-    const songPausedRef = useRef(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -39,26 +39,10 @@ const SongPlayer = ({ hasSong }) => {
     }
 
     const playSong = () => {
-        if (songPausedRef.current === false) {
-            const song = new Howl({
-                src: currentSong.url,
-                html5: true,
-                onend: function () {
-                    dispatch(clearSong())
-                },
-                onload: function () {
-                    dispatch(setDuration(song._duration))
-                }
-            })
-            dispatch(receivePlaySong())
-        } else {
-            songPausedRef.current = false;
-            dispatch(resumeSong())
-        }
+        dispatch(resumeSong())
     }
 
     const pauseCurrentSong = () => {
-        songPausedRef.current = true;
         dispatch(pauseSong())
     }
 
