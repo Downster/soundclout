@@ -6,10 +6,17 @@ const SET_DURATION = 'song_play/SET_DURATION'
 const SET_SEEK = 'song/SET_SEEK'
 const RESTART_SONG = 'song/RESTART_SONG'
 const SET_REPEAT = 'song/SET_REPEAT'
+const LOAD_SONG = 'song/LOAD_SONG'
 
 export const resumeSong = () => ({
     type: RESUME_SONG
 });
+
+export const loadSong = (song, songId) => ({
+    type: LOAD_SONG,
+    song,
+    songId
+})
 
 export const restartSong = () => ({
     type: RESTART_SONG
@@ -59,6 +66,11 @@ const songPlayReducer = (state = initialState, action) => {
     Object.freeze(state)
     const nextState = { ...state };
     switch (action.type) {
+        case LOAD_SONG:
+            nextState.song = action.song
+            nextState.songId = action.songId
+            nextState.isPaused = true
+            return nextState;
         case RECEIVE_PLAY_SONG:
             if (nextState.song) {
                 nextState.song.stop()

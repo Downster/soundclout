@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { receivePlaySong, pauseSong, clearSong, setDuration } from "../../store/songPlay"
+import { receivePlaySong, pauseSong, clearSong, setDuration, loadSong } from "../../store/songPlay"
 import { Howl } from 'howler'
 import { Link } from 'react-router-dom'
 import './songCard.css'
@@ -36,9 +36,9 @@ const SongCard = ({ song }) => {
         dispatch(pauseSong())
     }
 
-    const setCurrentSong = (song) => {
+    const setCurrentSong = (selectedSong) => {
         const sound = new Howl({
-            src: song.url,
+            src: selectedSong.url,
             html5: true,
             onend: function () {
                 dispatch(clearSong())
@@ -48,6 +48,7 @@ const SongCard = ({ song }) => {
             }
 
         });
+        dispatch(loadSong(song, song.id))
     }
 
 
@@ -58,7 +59,7 @@ const SongCard = ({ song }) => {
                 onClick={() => pause()} />
             <p className={'song-text'}>{song.title}</p>
             <p className={'song-text'}>{song.artist}</p>
-            <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => (isPlaying) ? setShowPlay(false) : setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
+            <Link id={`song-link-${song.id}`} onClick={setCurrentSong(song)} to={`/songs/${song.id}`} onMouseOver={() => (isPlaying) ? setShowPlay(false) : setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
                 <img alt='song' className={`song-image ${song.id}`} src={song.imageUrl} />
             </Link>
             <img className={(showPlay) ? `play-song-button` : `play-song-button hidden`}
