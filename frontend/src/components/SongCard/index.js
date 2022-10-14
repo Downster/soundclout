@@ -59,7 +59,7 @@ const SongCard = ({ song }) => {
                 onClick={() => pause()} />
             <p className={'song-text'}>{song.title}</p>
             <p className={'song-text'}>{song.artist}</p>
-            <Link id={`song-link-${song.id}`} onClick={setCurrentSong(song)} to={`/songs/${song.id}`} onMouseOver={() => (isPlaying) ? setShowPlay(false) : setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
+            <Link id={`song-link-${song.id}`} to={`/songs/${song.id}`} onMouseOver={() => (isPlaying) ? setShowPlay(false) : setShowPlay(true)} onMouseLeave={() => setShowPlay(false)}>
                 <img alt='song' className={`song-image ${song.id}`} src={song.imageUrl} />
             </Link>
             <img className={(showPlay) ? `play-song-button` : `play-song-button hidden`}
