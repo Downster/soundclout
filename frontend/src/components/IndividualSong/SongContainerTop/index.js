@@ -111,7 +111,6 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         }
     }, [comments, currentSong.isPlaying, currentSong.song, currentSong.songId, dispatch, song.id, song.url])
     useEffect(() => {
-        setCurrentSong(song);
         dispatch(updateSongTime((currentTime) ? currentTime.toFixed(2) : undefined))
 
         return () => {
@@ -148,20 +147,6 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         dispatch(pauseSong())
     }
 
-    const setCurrentSong = () => {
-        const sound = new Howl({
-            src: song.url,
-            html5: true,
-            onend: function () {
-                dispatch(clearSong())
-            },
-            onload: function () {
-                dispatch(setDuration(sound._duration))
-            }
-
-        });
-        dispatch(loadSong(sound, song.id))
-    }
 
 
 
