@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { receivePlaySong, pauseSong, clearSong, setDuration, loadSong } from "../../store/songPlay"
+import { receivePlaySong, pauseSong, clearSong, setDuration } from "../../store/songPlay"
 import { Howl } from 'howler'
 import { Link } from 'react-router-dom'
 import './songCard.css'
@@ -36,20 +36,6 @@ const SongCard = ({ song }) => {
         dispatch(pauseSong())
     }
 
-    const setCurrentSong = (selectedSong) => {
-        const sound = new Howl({
-            src: selectedSong.url,
-            html5: true,
-            onend: function () {
-                dispatch(clearSong())
-            },
-            onload: function () {
-                dispatch(setDuration(sound._duration))
-            }
-
-        });
-        dispatch(loadSong(song, song.id))
-    }
 
 
     return (

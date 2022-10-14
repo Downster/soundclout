@@ -6,7 +6,7 @@ import MarkersPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.markers.min.js';
 import { formatTime } from "../../../utils/formatTime";
 import { Howl } from 'howler'
 import { updateSongTime } from "../../../store/selectedSong";
-import { pauseSong, receivePlaySong, resumeSong, clearSong, setDuration } from "../../../store/songPlay";
+import { pauseSong, receivePlaySong, resumeSong, clearSong, setDuration, loadSong } from "../../../store/songPlay";
 import './songContainerTop.css'
 
 
@@ -111,6 +111,7 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
         }
     }, [comments, currentSong.isPlaying, currentSong.song, currentSong.songId, dispatch, song.id, song.url])
     useEffect(() => {
+        setCurrentSong(song);
         dispatch(updateSongTime((currentTime) ? currentTime.toFixed(2) : undefined))
 
         return () => {
@@ -145,6 +146,21 @@ const SongContainerTop = ({ sessionUser, song, comments }) => {
     const pauseCurrentSong = () => {
         waveSurfer.current.playPause()
         dispatch(pauseSong())
+    }
+
+    const setCurrentSong = (selectedSong) => {
+        const sound = new Howl({
+            src: selectedSong.url,
+            html5: true,
+            onend: function () {
+                dispatch(clearSong())
+            },
+            onload: function () {
+                dispatch(setDuration(sound._duration))
+            }
+
+        });
+        dispatch(loadSong(song, song.id))
     }
 
 
