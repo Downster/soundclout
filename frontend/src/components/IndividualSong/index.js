@@ -33,7 +33,6 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
             setCommentsLoaded(com)
         })()
         dispatch(addSelectedSong(song))
-        dispatch(receivePlaySong(song, songId))
         dispatch(getSongs())
         return () => {
             dispatch(clearLoadedComments())
