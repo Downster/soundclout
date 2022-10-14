@@ -55,7 +55,7 @@ export const setSeek = (seek) => ({
 const initialState = {
     song: null,
     isPlaying: false,
-    seek: 0,
+    seek: null,
     isPaused: false,
     duration: null,
     songId: null,
