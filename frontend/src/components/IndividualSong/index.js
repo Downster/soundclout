@@ -9,6 +9,7 @@ import './individualSong.css'
 import ArtistCard from "./ArtistCard"
 import CommentCard from "./CommentCard"
 import { getSongs } from "../../store/songs"
+import { receivePlaySong } from "../../store/songPlay"
 
 
 const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
@@ -19,7 +20,6 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
     const song = useSelector(state => state.songs[songId])
     const comments = useSelector(state => state.comments)
     const totalComments = (Object.keys(comments).length)
-    console.log(songId)
     let totalLikes;
     if (likes[songId]) {
         totalLikes = (Object.keys(likes[songId]).length)
@@ -33,6 +33,7 @@ const IndividualSong = ({ sessionUser, setShowEdit, showEdit }) => {
             setCommentsLoaded(com)
         })()
         dispatch(addSelectedSong(song))
+        dispatch(receivePlaySong(song, songId))
         dispatch(getSongs())
         return () => {
             dispatch(clearLoadedComments())
